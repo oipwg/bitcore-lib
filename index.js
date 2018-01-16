@@ -1,69 +1,69 @@
 'use strict';
 
-var bitcore = module.exports;
+var flocore = module.exports;
 
 // module information
-bitcore.version = 'v' + require('./package.json').version;
-bitcore.versionGuard = function(version) {
+flocore.version = 'v' + require('./package.json').version;
+flocore.versionGuard = function(version) {
   if (version !== undefined) {
-    var message = 'More than one instance of bitcore-lib found. ' +
-      'Please make sure to require bitcore-lib and check that submodules do' +
-      ' not also include their own bitcore-lib dependency.';
+    var message = 'More than one instance of flocore-lib found. ' +
+      'Please make sure to require flocore-lib and check that submodules do' +
+      ' not also include their own flocore-lib dependency.';
     throw new Error(message);
   }
 };
-bitcore.versionGuard(global._bitcore);
-global._bitcore = bitcore.version;
+flocore.versionGuard(global._flocore);
+global._flocore = flocore.version;
 
 // crypto
-bitcore.crypto = {};
-bitcore.crypto.BN = require('./lib/crypto/bn');
-bitcore.crypto.ECDSA = require('./lib/crypto/ecdsa');
-bitcore.crypto.Hash = require('./lib/crypto/hash');
-bitcore.crypto.Random = require('./lib/crypto/random');
-bitcore.crypto.Point = require('./lib/crypto/point');
-bitcore.crypto.Signature = require('./lib/crypto/signature');
+flocore.crypto = {};
+flocore.crypto.BN = require('./lib/crypto/bn');
+flocore.crypto.ECDSA = require('./lib/crypto/ecdsa');
+flocore.crypto.Hash = require('./lib/crypto/hash');
+flocore.crypto.Random = require('./lib/crypto/random');
+flocore.crypto.Point = require('./lib/crypto/point');
+flocore.crypto.Signature = require('./lib/crypto/signature');
 
 // encoding
-bitcore.encoding = {};
-bitcore.encoding.Base58 = require('./lib/encoding/base58');
-bitcore.encoding.Base58Check = require('./lib/encoding/base58check');
-bitcore.encoding.BufferReader = require('./lib/encoding/bufferreader');
-bitcore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-bitcore.encoding.Varint = require('./lib/encoding/varint');
+flocore.encoding = {};
+flocore.encoding.Base58 = require('./lib/encoding/base58');
+flocore.encoding.Base58Check = require('./lib/encoding/base58check');
+flocore.encoding.BufferReader = require('./lib/encoding/bufferreader');
+flocore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
+flocore.encoding.Varint = require('./lib/encoding/varint');
 
 // utilities
-bitcore.util = {};
-bitcore.util.buffer = require('./lib/util/buffer');
-bitcore.util.js = require('./lib/util/js');
-bitcore.util.preconditions = require('./lib/util/preconditions');
+flocore.util = {};
+flocore.util.buffer = require('./lib/util/buffer');
+flocore.util.js = require('./lib/util/js');
+flocore.util.preconditions = require('./lib/util/preconditions');
 
 // errors thrown by the library
-bitcore.errors = require('./lib/errors');
+flocore.errors = require('./lib/errors');
 
-// main bitcoin library
-bitcore.Address = require('./lib/address');
-bitcore.Block = require('./lib/block');
-bitcore.MerkleBlock = require('./lib/block/merkleblock');
-bitcore.BlockHeader = require('./lib/block/blockheader');
-bitcore.HDPrivateKey = require('./lib/hdprivatekey.js');
-bitcore.HDPublicKey = require('./lib/hdpublickey.js');
-bitcore.Networks = require('./lib/networks');
-bitcore.Opcode = require('./lib/opcode');
-bitcore.PrivateKey = require('./lib/privatekey');
-bitcore.PublicKey = require('./lib/publickey');
-bitcore.Script = require('./lib/script');
-bitcore.Transaction = require('./lib/transaction');
-bitcore.URI = require('./lib/uri');
-bitcore.Unit = require('./lib/unit');
+// main florincoin library
+flocore.Address = require('./lib/address');
+flocore.Block = require('./lib/block');
+flocore.MerkleBlock = require('./lib/block/merkleblock');
+flocore.BlockHeader = require('./lib/block/blockheader');
+flocore.HDPrivateKey = require('./lib/hdprivatekey.js');
+flocore.HDPublicKey = require('./lib/hdpublickey.js');
+flocore.Networks = require('./lib/networks');
+flocore.Opcode = require('./lib/opcode');
+flocore.PrivateKey = require('./lib/privatekey');
+flocore.PublicKey = require('./lib/publickey');
+flocore.Script = require('./lib/script');
+flocore.Transaction = require('./lib/transaction');
+flocore.URI = require('./lib/uri');
+flocore.Unit = require('./lib/unit');
 
 // dependencies, subject to change
-bitcore.deps = {};
-bitcore.deps.bnjs = require('bn.js');
-bitcore.deps.bs58 = require('bs58');
-bitcore.deps.Buffer = Buffer;
-bitcore.deps.elliptic = require('elliptic');
-bitcore.deps._ = require('lodash');
+flocore.deps = {};
+flocore.deps.bnjs = require('bn.js');
+flocore.deps.bs58 = require('bs58');
+flocore.deps.Buffer = Buffer;
+flocore.deps.elliptic = require('elliptic');
+flocore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
-bitcore.Transaction.sighash = require('./lib/transaction/sighash');
+flocore.Transaction.sighash = require('./lib/transaction/sighash');

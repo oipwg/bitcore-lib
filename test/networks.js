@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 var should = require('chai').should();
-var bitcore = require('..');
-var networks = bitcore.Networks;
+var flocore = require('..');
+var networks = flocore.Networks;
 
 describe('Networks', function() {
 
@@ -26,10 +26,10 @@ describe('Networks', function() {
     networks.testnet.networkMagic.should.deep.equal(new Buffer('0b110907', 'hex'));
     networks.testnet.port.should.equal(18333);
     networks.testnet.dnsSeeds.should.deep.equal([
-      'testnet-seed.bitcoin.petertodd.org',
+      'testnet-seed.florincoin.petertodd.org',
       'testnet-seed.bluematt.me',
       'testnet-seed.alexykot.me',
-      'testnet-seed.bitcoin.schildbach.de'
+      'testnet-seed.florincoin.schildbach.de'
     ]);
   });
 

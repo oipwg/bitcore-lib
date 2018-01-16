@@ -179,7 +179,7 @@ Address._classifyFromVersion = function(buffer) {
 };
 
 /**
- * Internal function to transform a bitcoin address buffer
+ * Internal function to transform a florincoin address buffer
  *
  * @param {Buffer} buffer - An instance of a hex encoded address Buffer
  * @param {string=} network - The network: 'livenet' or 'testnet'
@@ -254,7 +254,7 @@ Address._transformScript = function(script, network) {
 /**
  * Creates a P2SH address from a set of public keys and a threshold.
  *
- * The addresses will be sorted lexicographically, as that is the trend in bitcoin.
+ * The addresses will be sorted lexicographically, as that is the trend in florincoin.
  * To create an address from unsorted public keys, use the {@link Script#buildMultisigOut}
  * interface.
  *
@@ -269,7 +269,7 @@ Address.createMultisig = function(publicKeys, threshold, network) {
 };
 
 /**
- * Internal function to transform a bitcoin address string
+ * Internal function to transform a florincoin address string
  *
  * @param {string} data
  * @param {String|Network=} network - either a Network instance, 'livenet', or 'testnet'
@@ -376,7 +376,7 @@ Address.fromBuffer = function(buffer, network, type) {
 /**
  * Instantiate an address from an address string
  *
- * @param {string} str - An string of the bitcoin address
+ * @param {string} str - An string of the florincoin address
  * @param {String|Network=} network - either a Network instance, 'livenet', or 'testnet'
  * @param {string=} type - The type of address: 'script' or 'pubkey'
  * @returns {Address} A new valid and frozen instance of an Address
@@ -462,7 +462,7 @@ Address.prototype.isPayToScriptHash = function() {
 /**
  * Will return a buffer representation of the address
  *
- * @returns {Buffer} Bitcoin address buffer
+ * @returns {Buffer} Florincoin address buffer
  */
 Address.prototype.toBuffer = function() {
   var version = new Buffer([this.network[this.type]]);
@@ -484,7 +484,7 @@ Address.prototype.toObject = Address.prototype.toJSON = function toObject() {
 /**
  * Will return a the string representation of the address
  *
- * @returns {string} Bitcoin address
+ * @returns {string} Florincoin address
  */
 Address.prototype.toString = function() {
   return Base58Check.encode(this.toBuffer());
@@ -493,7 +493,7 @@ Address.prototype.toString = function() {
 /**
  * Will return a string formatted for the console
  *
- * @returns {string} Bitcoin address
+ * @returns {string} Florincoin address
  */
 Address.prototype.inspect = function() {
   return '<Address: ' + this.toString() + ', type: ' + this.type + ', network: ' + this.network + '>';
@@ -534,7 +534,7 @@ function Block(arg) {
   return this;
 }
 
-// https://github.com/bitcoin/bitcoin/blob/b5fa132329f0377d787a4a21c1686609c2bfaece/src/primitives/block.h#L14
+// https://github.com/florincoin/florincoin/blob/b5fa132329f0377d787a4a21c1686609c2bfaece/src/primitives/block.h#L14
 Block.MAX_BLOCK_SIZE = 1000000;
 
 /**
@@ -705,7 +705,7 @@ Block.prototype.getTransactionHashes = function getTransactionHashes() {
 /**
  * Will build a merkle tree of all the transactions, ultimately arriving at
  * a single point, the merkle root.
- * @link https://en.bitcoin.it/wiki/Protocol_specification#Merkle_Trees
+ * @link https://en.florincoin.it/wiki/Protocol_specification#Merkle_Trees
  * @returns {Array} - An array with each level of the tree after the other.
  */
 Block.prototype.getMerkleTree = function getMerkleTree() {
@@ -1010,7 +1010,7 @@ BlockHeader.prototype.getTargetDifficulty = function getTargetDifficulty(bits) {
 };
 
 /**
- * @link https://en.bitcoin.it/wiki/Difficulty
+ * @link https://en.florincoin.it/wiki/Difficulty
  * @return {Number}
  */
 BlockHeader.prototype.getDifficulty = function getDifficulty() {
@@ -1284,7 +1284,7 @@ MerkleBlock.prototype.filterdTxsHash = function filterdTxsHash() {
 
 /**
  * Traverse a the tree in this MerkleBlock, validating it along the way
- * Modeled after Bitcoin Core merkleblock.cpp TraverseAndExtract()
+ * Modeled after Florincoin Core merkleblock.cpp TraverseAndExtract()
  * @param {Number} - depth - Current height
  * @param {Number} - pos - Current position in the tree
  * @param {Object} - opts - Object with values that need to be mutated throughout the traversal
@@ -1334,7 +1334,7 @@ MerkleBlock.prototype._traverseMerkleTree = function traverseMerkleTree(depth, p
 };
 
 /** Calculates the width of a merkle tree at a given height.
- *  Modeled after Bitcoin Core merkleblock.h CalcTreeWidth()
+ *  Modeled after Florincoin Core merkleblock.h CalcTreeWidth()
  * @param {Number} - Height at which we want the tree width
  * @returns {Number} - Width of the tree at a given height
  * @private
@@ -1544,8 +1544,8 @@ BN.prototype.toSM = function(opts) {
 
 /**
  * Create a BN from a "ScriptNum":
- * This is analogous to the constructor for CScriptNum in bitcoind. Many ops in
- * bitcoind's script interpreter use CScriptNum, which is not really a proper
+ * This is analogous to the constructor for CScriptNum in florincoind. Many ops in
+ * florincoind's script interpreter use CScriptNum, which is not really a proper
  * bignum. Instead, an error is thrown if trying to input a number bigger than
  * 4 bytes. We copy that behavior here. A third argument, `size`, is provided to
  * extend the hard limit of 4 bytes, as some usages require more than 4 bytes.
@@ -1732,8 +1732,8 @@ ECDSA.prototype.deterministicK = function(badrs) {
 };
 
 // Information about public key recovery:
-// https://bitcointalk.org/index.php?topic=6430.0
-// http://stackoverflow.com/questions/19665491/how-do-i-get-an-ecdsa-public-key-from-just-a-bitcoin-signature-sec1-4-1-6-k
+// https://florincointalk.org/index.php?topic=6430.0
+// http://stackoverflow.com/questions/19665491/how-do-i-get-an-ecdsa-public-key-from-just-a-florincoin-signature-sec1-4-1-6-k
 ECDSA.prototype.toPublicKey = function() {
   /* jshint maxstatements: 25 */
   var i = this.sig.i;
@@ -2066,7 +2066,7 @@ Point.fromX = function fromX(odd, x){
  *
  * Will return a secp256k1 ECDSA base point.
  *
- * @link https://en.bitcoin.it/wiki/Secp256k1
+ * @link https://en.florincoin.it/wiki/Secp256k1
  * @returns {Point} An instance of the base point.
  */
 Point.getG = function getG() {
@@ -2077,7 +2077,7 @@ Point.getG = function getG() {
  *
  * Will return the max of range of valid private keys as governed by the secp256k1 ECDSA standard.
  *
- * @link https://en.bitcoin.it/wiki/Private_key#Range_of_valid_ECDSA_private_keys
+ * @link https://en.florincoin.it/wiki/Private_key#Range_of_valid_ECDSA_private_keys
  * @returns {BN} A BN instance of the number of points on the curve
  */
 Point.getN = function getN() {
@@ -2418,7 +2418,7 @@ Signature.prototype.toString = function() {
 };
 
 /**
- * This function is translated from bitcoind's IsDERSignature and is used in
+ * This function is translated from florincoind's IsDERSignature and is used in
  * the script interpreter.  This "DER" format actually includes an extra byte,
  * the nhashtype, at the end. It is really the tx format, not DER format.
  *
@@ -2427,7 +2427,7 @@ Signature.prototype.toString = function() {
  * excessively padded (do not start with a 0 byte, unless an otherwise negative number follows,
  * in which case a single 0 byte is necessary and even required).
  *
- * See https://bitcointalk.org/index.php?topic=8392.msg127623#msg127623
+ * See https://florincointalk.org/index.php?topic=8392.msg127623#msg127623
  */
 Signature.isTxDER = function(buf) {
   if (buf.length < 9) {
@@ -2496,7 +2496,7 @@ Signature.isTxDER = function(buf) {
 };
 
 /**
- * Compares to bitcoind's IsLowDERSignature
+ * Compares to florincoind's IsLowDERSignature
  * See also ECDSA signature algorithm which enforces this.
  * See also BIP 62, "low S values in signatures"
  */
@@ -2510,7 +2510,7 @@ Signature.prototype.hasLowS = function() {
 
 /**
  * @returns true if the nhashtype is exactly equal to one of the standard options or combinations thereof.
- * Translated from bitcoind's IsDefinedHashtypeSignature
+ * Translated from florincoind's IsDefinedHashtypeSignature
  */
 Signature.prototype.hasDefinedHashtype = function() {
   if (!JSUtil.isNaturalNumber(this.nhashtype)) {
@@ -3190,28 +3190,28 @@ var traverseRoot = function(parent, errorsDefinition) {
 };
 
 
-var bitcore = {};
-bitcore.Error = function() {
+var flocore = {};
+flocore.Error = function() {
   this.message = 'Internal error';
   this.stack = this.message + '\n' + (new Error()).stack;
 };
-bitcore.Error.prototype = Object.create(Error.prototype);
-bitcore.Error.prototype.name = 'bitcore.Error';
+flocore.Error.prototype = Object.create(Error.prototype);
+flocore.Error.prototype.name = 'flocore.Error';
 
 
 var data = require('./spec');
-traverseRoot(bitcore.Error, data);
+traverseRoot(flocore.Error, data);
 
-module.exports = bitcore.Error;
+module.exports = flocore.Error;
 
 module.exports.extend = function(spec) {
-  return traverseNode(bitcore.Error, spec);
+  return traverseNode(flocore.Error, spec);
 };
 
 },{"./spec":18,"lodash":319}],18:[function(require,module,exports){
 'use strict';
 
-var docsURL = 'http://bitcore.io/';
+var docsURL = 'http://flocore.io/';
 
 module.exports = [{
   name: 'InvalidB58Char',
@@ -3426,7 +3426,7 @@ var MAXIMUM_ENTROPY_BITS = 512;
 /**
  * Represents an instance of an hierarchically derived private key.
  *
- * More info on https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
+ * More info on https://github.com/florincoin/bips/blob/master/bip-0032.mediawiki
  *
  * @constructor
  * @param {string|Buffer|Object} arg
@@ -3815,7 +3815,7 @@ HDPrivateKey.fromSeed = function(hexa, network) {
   if (hexa.length > MAXIMUM_ENTROPY_BITS * BITS_TO_BYTES) {
     throw new hdErrors.InvalidEntropyArgument.TooMuchEntropy(hexa);
   }
-  var hash = Hash.sha512hmac(hexa, new buffer.Buffer('Bitcoin seed'));
+  var hash = Hash.sha512hmac(hexa, new buffer.Buffer('Florincoin seed'));
 
   return new HDPrivateKey({
     network: Network.get(network) || Network.defaultNetwork,
@@ -4060,9 +4060,9 @@ var Network = require('./networks');
 var Point = require('./crypto/point');
 var PublicKey = require('./publickey');
 
-var bitcoreErrors = require('./errors');
-var errors = bitcoreErrors;
-var hdErrors = bitcoreErrors.HDPublicKey;
+var flocoreErrors = require('./errors');
+var errors = flocoreErrors;
+var hdErrors = flocoreErrors.HDPublicKey;
 var assert = require('assert');
 
 var JSUtil = require('./util/js');
@@ -4071,7 +4071,7 @@ var BufferUtil = require('./util/buffer');
 /**
  * The representation of an hierarchically derived public key.
  *
- * See https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
+ * See https://github.com/florincoin/bips/blob/master/bip-0032.mediawiki
  *
  * @constructor
  * @param {Object|string|Buffer} arg
@@ -4555,7 +4555,7 @@ var networkMaps = {};
 
 /**
  * A network is merely a map containing values that correspond to version
- * numbers for each bitcoin network. Currently only supporting "livenet"
+ * numbers for each florincoin network. Currently only supporting "livenet"
  * (a.k.a. "mainnet") and "testnet".
  * @constructor
  */
@@ -4684,10 +4684,10 @@ addNetwork({
   networkMagic: 0xf9beb4d9,
   port: 8333,
   dnsSeeds: [
-    'seed.bitcoin.sipa.be',
+    'seed.florincoin.sipa.be',
     'dnsseed.bluematt.me',
-    'dnsseed.bitcoin.dashjr.org',
-    'seed.bitcoinstats.com',
+    'dnsseed.florincoin.dashjr.org',
+    'seed.florincoinstats.com',
     'seed.bitnodes.io',
     'bitseed.xf2.org'
   ]
@@ -4721,10 +4721,10 @@ var TESTNET = {
   PORT: 18333,
   NETWORK_MAGIC: BufferUtil.integerAsBuffer(0x0b110907),
   DNS_SEEDS: [
-    'testnet-seed.bitcoin.petertodd.org',
+    'testnet-seed.florincoin.petertodd.org',
     'testnet-seed.bluematt.me',
     'testnet-seed.alexykot.me',
-    'testnet-seed.bitcoin.schildbach.de'
+    'testnet-seed.florincoin.schildbach.de'
   ]
 };
 
@@ -5827,7 +5827,7 @@ PublicKey.prototype.toBuffer = PublicKey.prototype.toDER = function() {
 
 /**
  * Will return a sha256 + ripemd160 hash of the serialized public key
- * @see https://github.com/bitcoin/bitcoin/blob/master/src/pubkey.h#L141
+ * @see https://github.com/florincoin/florincoin/blob/master/src/pubkey.h#L141
  * @returns {Buffer}
  */
 PublicKey.prototype._getID = function _getID() {
@@ -5887,7 +5887,7 @@ var Signature = require('../crypto/signature');
 var PublicKey = require('../publickey');
 
 /**
- * Bitcoin transactions contain scripts. Each input has a script called the
+ * Florincoin transactions contain scripts. Each input has a script called the
  * scriptSig, and each output has a script called the scriptPubkey. To validate
  * an input, the input's script is concatenated with the referenced output script,
  * and the result is executed. If at the end of execution the stack contains a
@@ -5919,7 +5919,7 @@ var Interpreter = function Interpreter(obj) {
  * @param {number} nin - index of the transaction input containing the scriptSig verified.
  * @param {number} flags - evaluation flags. See Interpreter.SCRIPT_* constants
  *
- * Translated from bitcoind's VerifyScript
+ * Translated from florincoind's VerifyScript
  */
 Interpreter.prototype.verify = function(scriptSig, scriptPubkey, tx, nin, flags) {
   var Transaction = require('../transaction');
@@ -6064,8 +6064,8 @@ Interpreter.MAX_SCRIPT_ELEMENT_SIZE = 520;
 Interpreter.LOCKTIME_THRESHOLD = 500000000;
 Interpreter.LOCKTIME_THRESHOLD_BN = new BN(Interpreter.LOCKTIME_THRESHOLD);
 
-// flags taken from bitcoind
-// bitcoind commit: b5d1b1092998bc95313856d535c632ea5a8f9104
+// flags taken from florincoind
+// florincoind commit: b5d1b1092998bc95313856d535c632ea5a8f9104
 Interpreter.SCRIPT_VERIFY_NONE = 0;
 
 // Evaluate P2SH subscripts (softfork safe, BIP16).
@@ -6123,7 +6123,7 @@ Interpreter.castToBool = function(buf) {
 };
 
 /**
- * Translated from bitcoind's CheckSignatureEncoding
+ * Translated from florincoind's CheckSignatureEncoding
  */
 Interpreter.prototype.checkSignatureEncoding = function(buf) {
   var sig;
@@ -6147,7 +6147,7 @@ Interpreter.prototype.checkSignatureEncoding = function(buf) {
 };
 
 /**
- * Translated from bitcoind's CheckPubKeyEncoding
+ * Translated from florincoind's CheckPubKeyEncoding
  */
 Interpreter.prototype.checkPubkeyEncoding = function(buf) {
   if ((this.flags & Interpreter.SCRIPT_VERIFY_STRICTENC) !== 0 && !PublicKey.isValid(buf)) {
@@ -6158,9 +6158,9 @@ Interpreter.prototype.checkPubkeyEncoding = function(buf) {
 };
 
 /**
- * Based on bitcoind's EvalScript function, with the inner loop moved to
+ * Based on florincoind's EvalScript function, with the inner loop moved to
  * Interpreter.prototype.step()
- * bitcoind commit: b5d1b1092998bc95313856d535c632ea5a8f9104
+ * florincoind commit: b5d1b1092998bc95313856d535c632ea5a8f9104
  */
 Interpreter.prototype.evaluate = function() {
   if (this.script.toBuffer().length > 10000) {
@@ -6199,8 +6199,8 @@ Interpreter.prototype.evaluate = function() {
  * There are two times of nLockTime: lock-by-blockheight and lock-by-blocktime,
  * distinguished by whether nLockTime < LOCKTIME_THRESHOLD = 500000000
  *
- * See the corresponding code on bitcoin core:
- * https://github.com/bitcoin/bitcoin/blob/ffd75adce01a78b3461b3ff05bcc2b530a9ce994/src/script/interpreter.cpp#L1129
+ * See the corresponding code on florincoin core:
+ * https://github.com/florincoin/florincoin/blob/ffd75adce01a78b3461b3ff05bcc2b530a9ce994/src/script/interpreter.cpp#L1129
  *
  * @param {BN} nLockTime the locktime read from the script
  * @return {boolean} true if the transaction's locktime is less than or equal to
@@ -6242,8 +6242,8 @@ Interpreter.prototype.checkLockTime = function(nLockTime) {
 }
 
 /** 
- * Based on the inner loop of bitcoind's EvalScript function
- * bitcoind commit: b5d1b1092998bc95313856d535c632ea5a8f9104
+ * Based on the inner loop of florincoind's EvalScript function
+ * florincoind commit: b5d1b1092998bc95313856d535c632ea5a8f9104
  */
 Interpreter.prototype.step = function() {
 
@@ -7162,10 +7162,10 @@ var BufferUtil = require('../util/buffer');
 var JSUtil = require('../util/js');
 
 /**
- * A bitcoin transaction script. Each transaction's inputs and outputs
+ * A florincoin transaction script. Each transaction's inputs and outputs
  * has a script that is evaluated to validate it's spending.
  *
- * See https://en.bitcoin.it/wiki/Script
+ * See https://en.florincoin.it/wiki/Script
  *
  * @constructor
  * @param {Object|string|Buffer=} from optional data to populate script
@@ -8146,7 +8146,7 @@ Script.prototype.toAddress = function(network) {
 };
 
 /**
- * Analogous to bitcoind's FindAndDelete. Find and delete equivalent chunks,
+ * Analogous to florincoind's FindAndDelete. Find and delete equivalent chunks,
  * typically used with push data chunks.  Note that this will find and delete
  * not just the same data, but the same data with the same push data op as
  * produced by default. i.e., if a pushdata in a tx does not use the minimal
@@ -8170,7 +8170,7 @@ Script.prototype.findAndDelete = function(script) {
 };
 
 /**
- * Comes from bitcoind's script interpreter CheckMinimalPush function
+ * Comes from florincoind's script interpreter CheckMinimalPush function
  * @returns {boolean} if the chunk {i} is the smallest way to push that particular data.
  */
 Script.prototype.checkMinimalPush = function(i) {
@@ -8203,7 +8203,7 @@ Script.prototype.checkMinimalPush = function(i) {
 };
 
 /**
- * Comes from bitcoind's script DecodeOP_N function
+ * Comes from florincoind's script DecodeOP_N function
  * @param {number} opcode
  * @returns {number} numeric value in range of 0 to 16
  */
@@ -8218,7 +8218,7 @@ Script.prototype._decodeOP_N = function(opcode) {
 };
 
 /**
- * Comes from bitcoind's script GetSigOpCount(boolean) function
+ * Comes from florincoind's script GetSigOpCount(boolean) function
  * @param {boolean} use current (true) or pre-version-0.6 (false) logic
  * @returns {number} number of signature operations required by this script
  */
@@ -9265,7 +9265,7 @@ var sighash = function sighash(transaction, sighashType, inputNumber, subscript)
 
   } else if ((sighashType & 31) === Signature.SIGHASH_SINGLE) {
     // The SIGHASH_SINGLE bug.
-    // https://bitcointalk.org/index.php?topic=260595.0
+    // https://florincointalk.org/index.php?topic=260595.0
     if (inputNumber >= txcopy.outputs.length) {
       return new Buffer(SIGHASH_SINGLE_BUG, 'hex');
     }
@@ -9567,7 +9567,7 @@ Transaction.prototype._getHash = function() {
 };
 
 /**
- * Retrieve a hexa string that can be used with bitcoind's CLI interface
+ * Retrieve a hexa string that can be used with florincoind's CLI interface
  * (decoderawtransaction, sendrawtransaction)
  *
  * @param {Object|boolean=} unsafe if true, skip all tests. if it's an object,
@@ -9577,7 +9577,7 @@ Transaction.prototype._getHash = function() {
  * * `disableLargeFees`: disable checking for fees that are too large
  * * `disableIsFullySigned`: disable checking if all inputs are fully signed
  * * `disableDustOutputs`: disable checking if there are no outputs that are dust amounts
- * * `disableMoreOutputThanInput`: disable checking if the transaction spends more bitcoins than the sum of the input amounts
+ * * `disableMoreOutputThanInput`: disable checking if the transaction spends more florincoins than the sum of the input amounts
  * @return {string}
  */
 Transaction.prototype.serialize = function(unsafe) {
@@ -9593,7 +9593,7 @@ Transaction.prototype.uncheckedSerialize = Transaction.prototype.toString = func
 };
 
 /**
- * Retrieve a hexa string that can be used with bitcoind's CLI interface
+ * Retrieve a hexa string that can be used with florincoind's CLI interface
  * (decoderawtransaction, sendrawtransaction)
  *
  * @param {Object} opts allows to skip certain tests. {@see Transaction#serialize}
@@ -9603,7 +9603,7 @@ Transaction.prototype.checkedSerialize = function(opts) {
   var serializationError = this.getSerializationError(opts);
   if (serializationError) {
     serializationError.message += ' - For more information please see: ' +
-      'https://bitcore.io/api/lib/transaction#serialization-checks';
+      'https://flocore.io/api/lib/transaction#serialization-checks';
     throw serializationError;
   }
   return this.uncheckedSerialize();
@@ -9624,7 +9624,7 @@ Transaction.prototype.invalidSatoshis = function() {
  * broadcast this transaction.
  *
  * @param {Object} opts allows to skip certain tests. {@see Transaction#serialize}
- * @return {bitcore.Error}
+ * @return {flocore.Error}
  */
 Transaction.prototype.getSerializationError = function(opts) {
   opts = opts || {};
@@ -9933,8 +9933,8 @@ Transaction.prototype._newTransaction = function() {
  * Add an input to this transaction. This is a high level interface
  * to add an input, for more control, use @{link Transaction#addInput}.
  *
- * Can receive, as output information, the output of bitcoind's `listunspent` command,
- * and a slightly fancier format recognized by bitcore:
+ * Can receive, as output information, the output of florincoind's `listunspent` command,
+ * and a slightly fancier format recognized by flocore:
  *
  * ```
  * {
@@ -9945,8 +9945,8 @@ Transaction.prototype._newTransaction = function() {
  *  satoshis: 1020000
  * }
  * ```
- * Where `address` can be either a string or a bitcore Address object. The
- * same is true for `script`, which can be a string or a bitcore Script.
+ * Where `address` can be either a string or a flocore Address object. The
+ * same is true for `script`, which can be a string or a flocore Script.
  *
  * Beware that this resets all the signatures for inputs (in further versions,
  * SIGHASH_SINGLE or SIGHASH_NONE signatures will not be reset).
@@ -9955,7 +9955,7 @@ Transaction.prototype._newTransaction = function() {
  * ```javascript
  * var transaction = new Transaction();
  *
- * // From a pay to public key hash output from bitcoind's listunspent
+ * // From a pay to public key hash output from florincoind's listunspent
  * transaction.from({'txid': '0000...', vout: 0, amount: 0.1, scriptPubKey: 'OP_DUP ...'});
  *
  * // From a pay to public key hash output
@@ -10379,7 +10379,7 @@ Transaction.prototype.removeOutput = function(index) {
 /**
  * Sort a transaction's inputs and outputs according to BIP69
  *
- * @see {https://github.com/bitcoin/bips/blob/master/bip-0069.mediawiki}
+ * @see {https://github.com/florincoin/bips/blob/master/bip-0069.mediawiki}
  * @return {Transaction} this
  */
 Transaction.prototype.sort = function() {
@@ -10565,7 +10565,7 @@ Transaction.prototype.verifySignature = function(sig, pubkey, nin, subscript) {
 /**
  * Check that a transaction passes basic sanity tests. If not, return a string
  * describing the error. This function contains the same logic as
- * CheckTransaction in bitcoin core.
+ * CheckTransaction in florincoin core.
  */
 Transaction.prototype.verify = function() {
   // Basic checks that don't depend on any context
@@ -10628,7 +10628,7 @@ Transaction.prototype.verify = function() {
 };
 
 /**
- * Analogous to bitcoind's IsCoinBase function in transaction.h
+ * Analogous to florincoind's IsCoinBase function in transaction.h
  */
 Transaction.prototype.isCoinbase = function() {
   return (this.inputs.length === 1 && this.inputs[0].isNull());
@@ -10690,7 +10690,7 @@ var Unit = require('../unit');
  * @param {number=} data.outputIndex alias for `vout`
  * @param {string|Script} data.scriptPubKey the script that must be resolved to release the funds
  * @param {string|Script=} data.script alias for `scriptPubKey`
- * @param {number} data.amount amount of bitcoins associated
+ * @param {number} data.amount amount of florincoins associated
  * @param {number=} data.satoshis alias for `amount`, but expressed in satoshis (1 BTC = 1e8 satoshis)
  * @param {string|Address=} data.address the associated address to the script, if provided
  */
@@ -10786,7 +10786,7 @@ var UNITS = {
 };
 
 /**
- * Utility for handling and converting bitcoins units. The supported units are
+ * Utility for handling and converting florincoins units. The supported units are
  * BTC, mBTC, bits (also named uBTC) and satoshis. A unit instance can be created with an
  * amount and a unit code, or alternatively using static methods like {fromBTC}.
  * It also allows to be created from a fiat amount and the exchange rate, or
@@ -11019,10 +11019,10 @@ var Address = require('./address');
 var Unit = require('./unit');
 
 /**
- * Bitcore URI
+ * Flocore URI
  *
- * Instantiate an URI from a bitcoin URI String or an Object. An URI instance
- * can be created with a bitcoin uri string or an object. All instances of
+ * Instantiate an URI from a florincoin URI String or an Object. An URI instance
+ * can be created with a florincoin uri string or an object. All instances of
  * URI are valid, the static method isValid allows checking before instantiation.
  *
  * All standard parameters can be found as members of the class, the address
@@ -11032,13 +11032,13 @@ var Unit = require('./unit');
  * @example
  * ```javascript
  *
- * var uri = new URI('bitcoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu?amount=1.2');
+ * var uri = new URI('florincoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu?amount=1.2');
  * console.log(uri.address, uri.amount);
  * ```
  *
- * @param {string|Object} data - A bitcoin URI string or an Object
+ * @param {string|Object} data - A florincoin URI string or an Object
  * @param {Array.<string>=} knownParams - Required non-standard params
- * @throws {TypeError} Invalid bitcoin address
+ * @throws {TypeError} Invalid florincoin address
  * @throws {TypeError} Invalid amount
  * @throws {Error} Unknown required argument
  * @returns {URI} A new valid and frozen instance of URI
@@ -11090,16 +11090,16 @@ URI.fromObject = function fromObject(json) {
 };
 
 /**
- * Check if an bitcoin URI string is valid
+ * Check if an florincoin URI string is valid
  *
  * @example
  * ```javascript
  *
- * var valid = URI.isValid('bitcoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu');
+ * var valid = URI.isValid('florincoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu');
  * // true
  * ```
  *
- * @param {string|Object} data - A bitcoin URI string or an Object
+ * @param {string|Object} data - A florincoin URI string or an Object
  * @param {Array.<string>=} knownParams - Required non-standard params
  * @returns {boolean} Result of uri validation
  */
@@ -11113,17 +11113,17 @@ URI.isValid = function(arg, knownParams) {
 };
 
 /**
- * Convert a bitcoin URI string into a simple object.
+ * Convert a florincoin URI string into a simple object.
  *
- * @param {string} uri - A bitcoin URI string
- * @throws {TypeError} Invalid bitcoin URI
+ * @param {string} uri - A florincoin URI string
+ * @throws {TypeError} Invalid florincoin URI
  * @returns {Object} An object with the parsed params
  */
 URI.parse = function(uri) {
   var info = URL.parse(uri, true);
 
-  if (info.protocol !== 'bitcoin:') {
-    throw new TypeError('Invalid bitcoin URI');
+  if (info.protocol !== 'florincoin:') {
+    throw new TypeError('Invalid florincoin URI');
   }
 
   // workaround to host insensitiveness
@@ -11139,7 +11139,7 @@ URI.Members = ['address', 'amount', 'message', 'label', 'r'];
  * Internal function to load the URI instance with an object.
  *
  * @param {Object} obj - Object with the information
- * @throws {TypeError} Invalid bitcoin address
+ * @throws {TypeError} Invalid florincoin address
  * @throws {TypeError} Invalid amount
  * @throws {Error} Unknown required argument
  */
@@ -11147,7 +11147,7 @@ URI.prototype._fromObject = function(obj) {
   /* jshint maxcomplexity: 10 */
 
   if (!Address.isValid(obj.address)) {
-    throw new TypeError('Invalid bitcoin address');
+    throw new TypeError('Invalid florincoin address');
   }
 
   this.address = new Address(obj.address);
@@ -11198,7 +11198,7 @@ URI.prototype.toObject = URI.prototype.toJSON = function toObject() {
 /**
  * Will return a the string representation of the URI
  *
- * @returns {string} Bitcoin URI string
+ * @returns {string} Florincoin URI string
  */
 URI.prototype.toString = function() {
   var query = {};
@@ -11217,7 +11217,7 @@ URI.prototype.toString = function() {
   _.extend(query, this.extras);
 
   return URL.format({
-    protocol: 'bitcoin:',
+    protocol: 'florincoin:',
     host: this.address,
     query: query
   });
@@ -11226,7 +11226,7 @@ URI.prototype.toString = function() {
 /**
  * Will return a string formatted for the console
  *
- * @returns {string} Bitcoin URI
+ * @returns {string} Florincoin URI
  */
 URI.prototype.inspect = function() {
   return '<URI: ' + this.toString() + '>';
@@ -31475,7 +31475,7 @@ module.exports = basex(ALPHABET)
 },{"base-x":282}],282:[function(require,module,exports){
 // base-x encoding
 // Forked from https://github.com/cryptocoinjs/bs58
-// Originally written by Mike Hearn for BitcoinJ
+// Originally written by Mike Hearn for FlorincoinJ
 // Copyright (c) 2011 Google Inc
 // Ported to JavaScript by Stefan Thomas
 // Merged Buffer refactorings from base58-native by Stephen Pair
@@ -54020,9 +54020,9 @@ arguments[4][262][0].apply(exports,arguments)
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],320:[function(require,module,exports){
 module.exports={
-  "name": "bitcore-lib",
+  "name": "flocore-lib",
   "version": "0.15.0",
-  "description": "A pure and powerful JavaScript Bitcoin library.",
+  "description": "A pure and powerful JavaScript Florincoin library.",
   "author": "BitPay <dev@bitpay.com>",
   "main": "index.js",
   "scripts": {
@@ -54032,7 +54032,7 @@ module.exports={
     "build": "gulp"
   },
   "keywords": [
-    "bitcoin",
+    "florincoin",
     "transaction",
     "address",
     "p2p",
@@ -54049,7 +54049,7 @@ module.exports={
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/bitcore-lib.git"
+    "url": "https://github.com/bitpay/flocore-lib.git"
   },
   "browser": {
     "request": "browser-request"
@@ -54063,7 +54063,7 @@ module.exports={
     "lodash": "=4.17.4"
   },
   "devDependencies": {
-    "bitcore-build": "https://github.com/bitpay/bitcore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
+    "flocore-build": "https://github.com/bitpay/flocore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",
@@ -54072,77 +54072,77 @@ module.exports={
   "license": "MIT"
 }
 
-},{}],"bitcore-lib":[function(require,module,exports){
+},{}],"flocore-lib":[function(require,module,exports){
 (function (global,Buffer){
 'use strict';
 
-var bitcore = module.exports;
+var flocore = module.exports;
 
 // module information
-bitcore.version = 'v' + require('./package.json').version;
-bitcore.versionGuard = function(version) {
+flocore.version = 'v' + require('./package.json').version;
+flocore.versionGuard = function(version) {
   if (version !== undefined) {
-    var message = 'More than one instance of bitcore-lib found. ' +
-      'Please make sure to require bitcore-lib and check that submodules do' +
-      ' not also include their own bitcore-lib dependency.';
+    var message = 'More than one instance of flocore-lib found. ' +
+      'Please make sure to require flocore-lib and check that submodules do' +
+      ' not also include their own flocore-lib dependency.';
     throw new Error(message);
   }
 };
-bitcore.versionGuard(global._bitcore);
-global._bitcore = bitcore.version;
+flocore.versionGuard(global._flocore);
+global._flocore = flocore.version;
 
 // crypto
-bitcore.crypto = {};
-bitcore.crypto.BN = require('./lib/crypto/bn');
-bitcore.crypto.ECDSA = require('./lib/crypto/ecdsa');
-bitcore.crypto.Hash = require('./lib/crypto/hash');
-bitcore.crypto.Random = require('./lib/crypto/random');
-bitcore.crypto.Point = require('./lib/crypto/point');
-bitcore.crypto.Signature = require('./lib/crypto/signature');
+flocore.crypto = {};
+flocore.crypto.BN = require('./lib/crypto/bn');
+flocore.crypto.ECDSA = require('./lib/crypto/ecdsa');
+flocore.crypto.Hash = require('./lib/crypto/hash');
+flocore.crypto.Random = require('./lib/crypto/random');
+flocore.crypto.Point = require('./lib/crypto/point');
+flocore.crypto.Signature = require('./lib/crypto/signature');
 
 // encoding
-bitcore.encoding = {};
-bitcore.encoding.Base58 = require('./lib/encoding/base58');
-bitcore.encoding.Base58Check = require('./lib/encoding/base58check');
-bitcore.encoding.BufferReader = require('./lib/encoding/bufferreader');
-bitcore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-bitcore.encoding.Varint = require('./lib/encoding/varint');
+flocore.encoding = {};
+flocore.encoding.Base58 = require('./lib/encoding/base58');
+flocore.encoding.Base58Check = require('./lib/encoding/base58check');
+flocore.encoding.BufferReader = require('./lib/encoding/bufferreader');
+flocore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
+flocore.encoding.Varint = require('./lib/encoding/varint');
 
 // utilities
-bitcore.util = {};
-bitcore.util.buffer = require('./lib/util/buffer');
-bitcore.util.js = require('./lib/util/js');
-bitcore.util.preconditions = require('./lib/util/preconditions');
+flocore.util = {};
+flocore.util.buffer = require('./lib/util/buffer');
+flocore.util.js = require('./lib/util/js');
+flocore.util.preconditions = require('./lib/util/preconditions');
 
 // errors thrown by the library
-bitcore.errors = require('./lib/errors');
+flocore.errors = require('./lib/errors');
 
-// main bitcoin library
-bitcore.Address = require('./lib/address');
-bitcore.Block = require('./lib/block');
-bitcore.MerkleBlock = require('./lib/block/merkleblock');
-bitcore.BlockHeader = require('./lib/block/blockheader');
-bitcore.HDPrivateKey = require('./lib/hdprivatekey.js');
-bitcore.HDPublicKey = require('./lib/hdpublickey.js');
-bitcore.Networks = require('./lib/networks');
-bitcore.Opcode = require('./lib/opcode');
-bitcore.PrivateKey = require('./lib/privatekey');
-bitcore.PublicKey = require('./lib/publickey');
-bitcore.Script = require('./lib/script');
-bitcore.Transaction = require('./lib/transaction');
-bitcore.URI = require('./lib/uri');
-bitcore.Unit = require('./lib/unit');
+// main florincoin library
+flocore.Address = require('./lib/address');
+flocore.Block = require('./lib/block');
+flocore.MerkleBlock = require('./lib/block/merkleblock');
+flocore.BlockHeader = require('./lib/block/blockheader');
+flocore.HDPrivateKey = require('./lib/hdprivatekey.js');
+flocore.HDPublicKey = require('./lib/hdpublickey.js');
+flocore.Networks = require('./lib/networks');
+flocore.Opcode = require('./lib/opcode');
+flocore.PrivateKey = require('./lib/privatekey');
+flocore.PublicKey = require('./lib/publickey');
+flocore.Script = require('./lib/script');
+flocore.Transaction = require('./lib/transaction');
+flocore.URI = require('./lib/uri');
+flocore.Unit = require('./lib/unit');
 
 // dependencies, subject to change
-bitcore.deps = {};
-bitcore.deps.bnjs = require('bn.js');
-bitcore.deps.bs58 = require('bs58');
-bitcore.deps.Buffer = Buffer;
-bitcore.deps.elliptic = require('elliptic');
-bitcore.deps._ = require('lodash');
+flocore.deps = {};
+flocore.deps.bnjs = require('bn.js');
+flocore.deps.bs58 = require('bs58');
+flocore.deps.Buffer = Buffer;
+flocore.deps.elliptic = require('elliptic');
+flocore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
-bitcore.Transaction.sighash = require('./lib/transaction/sighash');
+flocore.Transaction.sighash = require('./lib/transaction/sighash');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 },{"./lib/address":1,"./lib/block":4,"./lib/block/blockheader":3,"./lib/block/merkleblock":5,"./lib/crypto/bn":6,"./lib/crypto/ecdsa":7,"./lib/crypto/hash":8,"./lib/crypto/point":9,"./lib/crypto/random":10,"./lib/crypto/signature":11,"./lib/encoding/base58":12,"./lib/encoding/base58check":13,"./lib/encoding/bufferreader":14,"./lib/encoding/bufferwriter":15,"./lib/encoding/varint":16,"./lib/errors":17,"./lib/hdprivatekey.js":19,"./lib/hdpublickey.js":20,"./lib/networks":21,"./lib/opcode":22,"./lib/privatekey":23,"./lib/publickey":24,"./lib/script":25,"./lib/transaction":28,"./lib/transaction/sighash":36,"./lib/unit":40,"./lib/uri":41,"./lib/util/buffer":42,"./lib/util/js":43,"./lib/util/preconditions":44,"./package.json":320,"bn.js":280,"bs58":281,"buffer":47,"elliptic":285,"lodash":319}]},{},[]);

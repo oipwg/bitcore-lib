@@ -1,7 +1,7 @@
 {
-  "name": "bitcore-lib",
+  "name": "flocore-lib",
   "version": "0.15.0",
-  "description": "A pure and powerful JavaScript Bitcoin library.",
+  "description": "A pure and powerful JavaScript Florincoin library.",
   "author": "BitPay <dev@bitpay.com>",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "build": "gulp"
   },
   "keywords": [
-    "bitcoin",
+    "florincoin",
     "transaction",
     "address",
     "p2p",
@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/bitcore-lib.git"
+    "url": "https://github.com/oipwg/flocore-lib.git"
   },
   "browser": {
     "request": "browser-request"
@@ -42,7 +42,7 @@
     "lodash": "=4.17.4"
   },
   "devDependencies": {
-    "bitcore-build": "https://github.com/bitpay/bitcore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
+    "bitcore-build": "https://github.com/bitpay/flocore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",

@@ -106,8 +106,8 @@ describe('ECDSA', function() {
         .should.equal('727fbcb59eb48b1d7d46f95a04991fc512eb9dbf9105628e3aec87428df28fd8');
     });
     it('should compute this test vector correctly', function() {
-      // test fixture from bitcoinjs
-      // https://github.com/bitcoinjs/bitcoinjs-lib/blob/10630873ebaa42381c5871e20336fbfb46564ac8/test/fixtures/ecdsa.json#L6
+      // test fixture from florincoinjs
+      // https://github.com/florincoinjs/florincoinjs-lib/blob/10630873ebaa42381c5871e20336fbfb46564ac8/test/fixtures/ecdsa.json#L6
       var ecdsa = new ECDSA();
       ecdsa.hashbuf = Hash.sha256(new Buffer('Everything should be made as simple as possible, but not simpler.'));
       ecdsa.privkey = new Privkey(new BN(1));

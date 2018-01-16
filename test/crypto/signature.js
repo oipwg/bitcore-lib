@@ -2,14 +2,14 @@
 
 var _ = require('lodash');
 var should = require('chai').should();
-var bitcore = require('../..');
-var BN = bitcore.crypto.BN;
-var Signature = bitcore.crypto.Signature;
-var JSUtil = bitcore.util.js;
-var Interpreter = bitcore.Script.Interpreter;
+var flocore = require('../..');
+var BN = flocore.crypto.BN;
+var Signature = flocore.crypto.Signature;
+var JSUtil = flocore.util.js;
+var Interpreter = flocore.Script.Interpreter;
 
-var sig_canonical = require('../data/bitcoind/sig_canonical');
-var sig_noncanonical = require('../data/bitcoind/sig_noncanonical');
+var sig_canonical = require('../data/florincoind/sig_canonical');
+var sig_noncanonical = require('../data/florincoind/sig_noncanonical');
 
 describe('Signature', function() {
 
@@ -251,7 +251,7 @@ describe('Signature', function() {
     });
 
 
-    describe('bitcoind fixtures', function() {
+    describe('florincoind fixtures', function() {
       var test_sigs = function(set, expected) {
         var i = 0;
         set.forEach(function(vector) {

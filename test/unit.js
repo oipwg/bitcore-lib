@@ -3,9 +3,9 @@
 var should = require('chai').should();
 var expect = require('chai').expect;
 
-var bitcore = require('..');
-var errors = bitcore.errors;
-var Unit = bitcore.Unit;
+var flocore = require('..');
+var errors = flocore.errors;
+var Unit = flocore.Unit;
 
 describe('Unit', function() {
 

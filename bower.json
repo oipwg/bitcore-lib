@@ -1,12 +1,12 @@
 {
-  "name": "bitcore-lib",
-  "main": "./bitcore-lib.min.js",
+  "name": "flocore-lib",
+  "main": "./flocore-lib.min.js",
   "version": "5.0.0-beta.1",
-  "homepage": "http://bitcore.io",
+  "homepage": "http://flocore.io",
   "authors": ["BitPay, Inc."],
-  "description": "A pure, powerful core for your bitcoin project.",
+  "description": "A pure, powerful core for your florincoin project.",
   "moduleType": ["globals"],
-  "keywords": ["bitcoin", "bitcore", "btc", "satoshi"],
+  "keywords": ["florincoin", "flocore", "btc", "satoshi"],
   "license": "MIT",
   "ignore": [
     "**/.*",

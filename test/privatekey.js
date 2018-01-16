@@ -4,15 +4,15 @@ var chai = require('chai');
 var should = chai.should();
 var expect = chai.expect;
 
-var bitcore = require('..');
-var BN = bitcore.crypto.BN;
-var Point = bitcore.crypto.Point;
-var PrivateKey = bitcore.PrivateKey;
-var Networks = bitcore.Networks;
-var Base58Check = bitcore.encoding.Base58Check;
+var flocore = require('..');
+var BN = flocore.crypto.BN;
+var Point = flocore.crypto.Point;
+var PrivateKey = flocore.PrivateKey;
+var Networks = flocore.Networks;
+var Base58Check = flocore.encoding.Base58Check;
 
-var validbase58 = require('./data/bitcoind/base58_keys_valid.json');
-var invalidbase58 = require('./data/bitcoind/base58_keys_invalid.json');
+var validbase58 = require('./data/florincoind/base58_keys_valid.json');
+var invalidbase58 = require('./data/florincoind/base58_keys_invalid.json');
 
 describe('PrivateKey', function() {
   var hex = '96c132224121b509b7d0a16245e957d9192609c5637c6228311287b1be21627a';
@@ -88,7 +88,7 @@ describe('PrivateKey', function() {
     should.exist(a.bn);
   });
 
-  describe('bitcoind compliance', function() {
+  describe('florincoind compliance', function() {
     validbase58.map(function(d){
       if (d[2].isPrivkey) {
         it('should instantiate WIF private key ' + d[0] + ' with correct properties', function() {
