@@ -54049,7 +54049,7 @@ module.exports={
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/flocore-lib.git"
+    "url": "https://github.com/oipwg/flocore-lib.git"
   },
   "browser": {
     "request": "browser-request"
@@ -54063,7 +54063,7 @@ module.exports={
     "lodash": "=4.17.4"
   },
   "devDependencies": {
-    "flocore-build": "https://github.com/bitpay/flocore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
+    "flocore-build": "https://github.com/oipwg/flocore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",

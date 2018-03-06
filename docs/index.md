@@ -35,14 +35,14 @@ To get started, just `npm install flocore` or `bower install flocore`.
 
 Some functionality is implemented as a module that can be installed separately:
 
-* [Payment Protocol Support](https://github.com/bitpay/flocore-payment-protocol)
-* [Peer to Peer Networking](https://github.com/bitpay/flocore-p2p)
-* [Florincoin Core JSON-RPC](https://github.com/bitpay/florincoind-rpc)
-* [Payment Channels](https://github.com/bitpay/flocore-channel)
-* [Mnemonics](https://github.com/bitpay/flocore-mnemonic)
-* [Elliptical Curve Integrated Encryption Scheme](https://github.com/bitpay/flocore-ecies)
-* [Blockchain Explorers](https://github.com/bitpay/flocore-explorers)
-* [Signed Messages](https://github.com/bitpay/flocore-message)
+* [Payment Protocol Support](https://github.com/oipwg/flocore-payment-protocol)
+* [Peer to Peer Networking](https://github.com/oipwg/flocore-p2p)
+* [Florincoin Core JSON-RPC](https://github.com/oipwg/florincoind-rpc)
+* [Payment Channels](https://github.com/oipwg/flocore-channel)
+* [Mnemonics](https://github.com/oipwg/flocore-mnemonic)
+* [Elliptical Curve Integrated Encryption Scheme](https://github.com/oipwg/flocore-ecies)
+* [Blockchain Explorers](https://github.com/oipwg/flocore-explorers)
+* [Signed Messages](https://github.com/oipwg/flocore-message)
 
 # Examples
 
