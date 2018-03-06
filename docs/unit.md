@@ -13,12 +13,12 @@ To understand the need of using the `Unit` class when dealing with unit conversi
 ```
 
 ## Supported units
-The supported units are BTC, mBTC, bits (micro BTCs, uBTC) and satoshis. The codes for each unit can be found as members of the Unit class.
+The supported units are FLO, mFLO, bits (micro FLOs, uFLO) and satoshis. The codes for each unit can be found as members of the Unit class.
 
 ```javascript
-var btcCode = Unit.BTC;
-var mbtcCode = Unit.mBTC;
-var ubtcCode = Unit.uBTC;
+var btcCode = Unit.FLO;
+var mbtcCode = Unit.mFLO;
+var ubtcCode = Unit.uFLO;
 var bitsCode = Unit.bits;
 var satsCode = Unit.satoshis;
 ```
@@ -31,11 +31,11 @@ var unit;
 var amount = 100;
 
 // using a unit code
-var unitPreference = Unit.BTC;
+var unitPreference = Unit.FLO;
 unit = new Unit(amount, unitPreference);
 
 // using a known unit
-unit = Unit.fromBTC(amount);
+unit = Unit.fromFLO(amount);
 unit = Unit.fromMilis(amount);
 unit = Unit.fromBits(amount);
 unit = Unit.fromSatoshis(amount);
@@ -48,24 +48,24 @@ Once you have a unit instance, you can check its representation in all the avail
 var unit;
 
 // using a unit code
-var unitPreference = Unit.BTC;
+var unitPreference = Unit.FLO;
 value = Unit.fromSatoshis(amount).to(unitPreference);
 
 // using a known unit
-value = Unit.fromBTC(amount).toBTC();
-value = Unit.fromBTC(amount).toMilis();
-value = Unit.fromBTC(amount).toBits();
-value = Unit.fromBTC(amount).toSatoshis();
+value = Unit.fromFLO(amount).toFLO();
+value = Unit.fromFLO(amount).toMilis();
+value = Unit.fromFLO(amount).toBits();
+value = Unit.fromFLO(amount).toSatoshis();
 
 // using accessors
-value = Unit.fromBTC(amount).BTC;
-value = Unit.fromBTC(amount).mBTC;
-value = Unit.fromBTC(amount).bits;
-value = Unit.fromBTC(amount).satoshis;
+value = Unit.fromFLO(amount).FLO;
+value = Unit.fromFLO(amount).mFLO;
+value = Unit.fromFLO(amount).bits;
+value = Unit.fromFLO(amount).satoshis;
 ```
 
 ## Using a fiat currency
-The unit class also provides a convenient alternative to create an instance from a fiat amount and the corresponding BTC/fiat exchange rate. Any unit instance can be converted to a fiat amount by providing the current exchange rate. Check the example below:
+The unit class also provides a convenient alternative to create an instance from a fiat amount and the corresponding FLO/fiat exchange rate. Any unit instance can be converted to a fiat amount by providing the current exchange rate. Check the example below:
 
 ```javascript
 var unit, fiat;
