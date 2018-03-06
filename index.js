@@ -63,6 +63,7 @@ flocore.deps.bnjs = require('bn.js');
 flocore.deps.bs58 = require('bs58');
 flocore.deps.Buffer = Buffer;
 flocore.deps.elliptic = require('elliptic');
+flocore.deps.scryptsy = require('scryptsy');
 flocore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
