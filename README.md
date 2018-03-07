@@ -93,4 +93,4 @@ or create a test coverage report (you can open `coverage/lcov-report/index.html`
 
 Code released under [the MIT license](https://github.com/oipwg/flocore-lib/blob/master/LICENSE).
 
-Copyright 2013-2017 BitPay, Inc. Flocore is a trademark maintained by BitPay, Inc.
+Copyright 2013-2018 BitPay, Inc. Bitcore is a trademark maintained by BitPay, Inc. Flocore is a fork of it.
