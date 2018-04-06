@@ -8,15 +8,15 @@ var PrivateKey = flocore.PrivateKey;
 describe('PublicKeyInput', function() {
 
   var utxo = {
-    txid: '7f3b688cb224ed83e12d9454145c26ac913687086a0a62f2ae0bc10934a4030f',
+    txid: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     vout: 0,
-    address: 'n4McBrSkw42eYGX5YMACGpkGUJKL3jVSbo',
-    scriptPubKey: '2103c9594cb2ebfebcb0cfd29eacd40ba012606a197beef76f0269ed8c101e56ceddac',
-    amount: 50,
+    address: 'oPoBiZJxdHtNYVNhNTspRE8a4id6ytMKzY',
+    scriptPubKey: '76a9144bfe7033b03d04a9143203cfb8350cad125ebfa488ac',
+    amount: 0.001,
     confirmations: 104,
     spendable: true
   };
-  var privateKey = PrivateKey.fromWIF('cQ7tSSQDEwaxg9usnnP1Aztqvm9nCQVfNWz9kU2rdocDjknF2vd6');
+  var privateKey = PrivateKey.fromWIF('cSY2jbTDyPhmEx94TD72NwuHQ4J4pxzMEjj8G1Nc7c1eptCnevza');
   var address = privateKey.toAddress();
   utxo.address.should.equal(address.toString());
 

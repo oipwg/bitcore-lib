@@ -353,10 +353,10 @@ describe('PublicKey', function() {
     // wif private key, address
     // see: https://github.com/florincoin/florincoin/blob/master/src/test/key_tests.cpp#L20
     var data = [
-      ['5HxWvvfubhXpYYpS3tJkw6fq9jE9j18THftkZjHHfmFiWtmAbrj', '1QFqqMUD55ZV3PJEJZtaKCsQmjLT6JkjvJ'],
-      ['5KC4ejrDjv152FGwP386VD1i2NYc5KkfSMyv1nGy1VGDxGHqVY3', '1F5y5E5FMc5YzdJtB9hLaUe43GDxEKXENJ'],
-      ['Kwr371tjA9u2rFSMZjTNun2PXXP3WPZu2afRHTcta6KxEUdm1vEw', '1NoJrossxPBKfCHuJXT4HadJrXRE9Fxiqs'],
-      ['L3Hq7a8FEQwJkW1M2GNKDW28546Vp5miewcCzSqUD9kCAXrJdS3g', '1CRj2HyM1CXWzHAXLQtiGLyggNT9WQqsDs']
+      ['R84pr9gLKh9pmverWiQgTHM6XsXmYm298n5esPxNeyzw2jaccYSv', 'FT4uS6RPaH9UKYTzDRgPdwtu5qJZJEMH9y'],
+      ['RAPJdnwojeHowYRawgWKnqrVzAxGDRSc9Ji9WXd4h5tYk668g9B7', 'FHnEUpcQXxuDguNXvPbCB5t9Va21gduw3N'],
+      ['R9BgyN4Yyem4c9t5oJt7qb4x4iY7hu1S6R2E92oURjKoFpi7gW1E', 'FRBzpr66pNgXsJrWLALp8nHPBVuYM7FYNu'],
+      ['RF9KNJN7PC1pqTpzFtpX1hespRZxBj4Ld9sv1nAdm1Jpu6VTLoYP', 'FTdVppkKSLXHcaMtrHNNdEJeZjxVk1xHfT']
     ];
     
     data.forEach(function(d){

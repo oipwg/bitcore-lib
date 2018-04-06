@@ -40,10 +40,10 @@ describe('Transaction', function() {
     }).to.throw(errors.InvalidArgument);
   });
 
-  var testScript = 'OP_DUP OP_HASH160 20 0x88d9931ea73d60eaf7e5671efc0552b912911f2a OP_EQUALVERIFY OP_CHECKSIG';
-  var testScriptHex = '76a91488d9931ea73d60eaf7e5671efc0552b912911f2a88ac';
-  var testPrevTx = 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458';
-  var testAmount = 1020000;
+  var testScript = 'OP_DUP OP_HASH160 4bfe7033b03d04a9143203cfb8350cad125ebfa4 OP_EQUALVERIFY OP_CHECKSIG';
+  var testScriptHex = '76a9144bfe7033b03d04a9143203cfb8350cad125ebfa488ac';
+  var testPrevTx = '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f';
+  var testAmount = 100000;
   var testTransaction = new Transaction()
     .from({
       'txId': testPrevTx,
@@ -51,7 +51,7 @@ describe('Transaction', function() {
       'script': testScript,
       'satoshis': testAmount
     })
-    .to('mrU9pEmAx26HcbKVrABvgL7AwA5fjNFoDc', testAmount - 10000);
+    .to('oYVNuMx5VUrVkkZJv6jPWxoTD3r4w7bnMf', testAmount - 10000);
 
   it('can serialize to a plain javascript object', function() {
     var object = testTransaction.toObject();
@@ -64,7 +64,7 @@ describe('Transaction', function() {
 
   it('will not accept NaN as an amount', function() {
     (function() {
-      var stringTx = new Transaction().to('mrU9pEmAx26HcbKVrABvgL7AwA5fjNFoDc', NaN);
+      var stringTx = new Transaction().to('oYVNuMx5VUrVkkZJv6jPWxoTD3r4w7bnMf', NaN);
     }).should.throw('Amount is expected to be a positive integer');
   });
 
@@ -198,10 +198,10 @@ describe('Transaction', function() {
 
   // TODO: Migrate this into a test for inputs
 
-  var fromAddress = 'mszYqVnqKoQx4jcTdJXxwKAissE3Jbrrc1';
+  var fromAddress = 'oPoBiZJxdHtNYVNhNTspRE8a4id6ytMKzY';
   var simpleUtxoWith100000Satoshis = {
     address: fromAddress,
-    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 0,
     script: Script.buildPublicKeyHashOut(fromAddress).toString(),
     satoshis: 100000
@@ -209,17 +209,17 @@ describe('Transaction', function() {
 
   var simpleUtxoWith1000000Satoshis = {
     address: fromAddress,
-    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 0,
     script: Script.buildPublicKeyHashOut(fromAddress).toString(),
     satoshis: 1000000
   };
   var anyoneCanSpendUTXO = JSON.parse(JSON.stringify(simpleUtxoWith100000Satoshis));
   anyoneCanSpendUTXO.script = new Script().add('OP_TRUE');
-  var toAddress = 'mrU9pEmAx26HcbKVrABvgL7AwA5fjNFoDc';
-  var changeAddress = 'mgBCJAsvzgT2qNNeXsoECg2uPKrUsZ76up';
-  var changeAddressP2SH = '2N7T3TAetJrSCruQ39aNrJvYLhG1LJosujf';
-  var privateKey = 'cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY';
+  var toAddress = 'oYVNuMx5VUrVkkZJv6jPWxoTD3r4w7bnMf';
+  var changeAddress = 'oPoBiZJxdHtNYVNhNTspRE8a4id6ytMKzY';
+  var changeAddressP2SH = 'oPoBiZJxdHtNYVNhNTspRE8a4id6ytMKzY';
+  var privateKey = 'cSY2jbTDyPhmEx94TD72NwuHQ4J4pxzMEjj8G1Nc7c1eptCnevza';
   var private1 = '6ce7e97e317d2af16c33db0b9270ec047a91bff3eff8558afb5014afb2bb5976';
   var private2 = 'c9b26b0f771a0d2dad88a44de90f05f416b3b385ff1d989343005546a0032890';
   var public1 = new PrivateKey(private1).publicKey;
@@ -227,7 +227,7 @@ describe('Transaction', function() {
 
   var simpleUtxoWith1FLO = {
     address: fromAddress,
-    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 1,
     script: Script.buildPublicKeyHashOut(fromAddress).toString(),
     satoshis: 1e8
@@ -237,11 +237,11 @@ describe('Transaction', function() {
   var fourth = 25e6;
   var half = 5e7;
 
-  var p2shPrivateKey1 = PrivateKey.fromWIF('cNuW8LX2oeQXfKKCGxajGvqwhCgBtacwTQqiCGHzzKfmpHGY4TE9');
+  var p2shPrivateKey1 = PrivateKey.fromWIF('cWA4VXpGArqr2Y2Z4KvhGx8nNEjAgzycaqS6ZGrWFKCYBdtL2FV8');
   var p2shPublicKey1 = p2shPrivateKey1.toPublicKey();
-  var p2shPrivateKey2 = PrivateKey.fromWIF('cTtLHt4mv6zuJytSnM7Vd6NLxyNauYLMxD818sBC8PJ1UPiVTRSs');
+  var p2shPrivateKey2 = PrivateKey.fromWIF('cRRfp177BL8fjhSsYBDymSjb5rG1p8F1AD51vrwhoRiCNU6ur59r');
   var p2shPublicKey2 = p2shPrivateKey2.toPublicKey();
-  var p2shPrivateKey3 = PrivateKey.fromWIF('cQFMZ5gP9CJtUZPc9X3yFae89qaiQLspnftyxxLGvVNvM6tS6mYY');
+  var p2shPrivateKey3 = PrivateKey.fromWIF('cTKLF5W5SLaGTTMs7bWQ73nR4Zs118W1HZA57CWzW16A7KPqoZTv');
   var p2shPublicKey3 = p2shPrivateKey3.toPublicKey();
 
   var p2shAddress = Address.createMultisig([
@@ -251,7 +251,7 @@ describe('Transaction', function() {
   ], 2, 'testnet');
   var p2shUtxoWith1FLO = {
     address: p2shAddress.toString(),
-    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 0,
     script: Script(p2shAddress).toString(),
     satoshis: 1e8

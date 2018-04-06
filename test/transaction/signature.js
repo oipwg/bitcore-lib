@@ -15,14 +15,14 @@ var errors = flocore.errors;
 
 describe('TransactionSignature', function() {
 
-  var fromAddress = 'mszYqVnqKoQx4jcTdJXxwKAissE3Jbrrc1';
-  var privateKey = 'cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY';
+  var fromAddress = 'F97NDdJPm81JTK73uWt3gpWJs4Q3UsE6mn';
+  var privateKey = 'RBpVW3Pk7piyWGNcVV4kzsgPQcVXGgX3BEZHYQh7JUv941yfgv2V';
   var simpleUtxoWith100000Satoshis = {
     address: fromAddress,
-    txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
+    txId: '33268a083b8bb42a43a55902b760f8f5d42996f849db34f92376cde5ff763bde',
     outputIndex: 0,
     script: Script.buildPublicKeyHashOut(fromAddress).toString(),
-    satoshis: 100000
+    satoshis: 246897
   };
 
   var getSignatureFromTransaction = function() {

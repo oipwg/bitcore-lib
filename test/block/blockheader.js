@@ -10,10 +10,10 @@ var fs = require('fs');
 var should = require('chai').should();
 
 // https://test-insight.bitpay.com/block/000000000b99b16390660d79fcc138d2ad0c89a0d044c4201a02bdf1f61ffa11
-var dataRawBlockBuffer = fs.readFileSync('test/data/blk86756-testnet.dat');
-var dataRawBlockBinary = fs.readFileSync('test/data/blk86756-testnet.dat', 'binary');
-var dataRawId = '000000000b99b16390660d79fcc138d2ad0c89a0d044c4201a02bdf1f61ffa11';
-var data = require('../data/blk86756-testnet');
+var dataRawBlockBuffer = fs.readFileSync('test/data/blk50000-testnet.dat');
+var dataRawBlockBinary = fs.readFileSync('test/data/blk50000-testnet.dat', 'binary');
+var dataRawId = '629a1c3f692fd1e4c9a711d85a31a0861e6b551edf993c8c5b20619130f30c07';
+var data = require('../data/blk50000-testnet');
 
 describe('BlockHeader', function() {
 
@@ -66,7 +66,7 @@ describe('BlockHeader', function() {
     it('will throw an error if the argument object hash property doesn\'t match', function() {
       (function() {
         var bh = new BlockHeader({
-          hash: '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f',
+          hash: '629a1c3f692fd1e4c9a711d85a31a0861e6b551edf993c8c5b20619130f30c07',
           version: version,
           prevHash: prevblockidbuf,
           merkleRoot: merklerootbuf,

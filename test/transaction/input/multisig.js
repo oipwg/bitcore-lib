@@ -15,18 +15,18 @@ var MultiSigInput = flocore.Transaction.Input.MultiSig;
 
 describe('MultiSigInput', function() {
 
-  var privateKey1 = new PrivateKey('KwF9LjRraetZuEjR8VqEq539z137LW5anYDUnVK11vM3mNMHTWb4');
-  var privateKey2 = new PrivateKey('L4PqnaPTCkYhAqH3YQmefjxQP6zRcF4EJbdGqR8v6adtG9XSsadY');
-  var privateKey3 = new PrivateKey('L4CTX79zFeksZTyyoFuPQAySfmP7fL3R41gWKTuepuN7hxuNuJwV');
+  var privateKey1 = new PrivateKey('cNSvQov1Qrh2sqGaCRWzs1ppPKKEDfKQbS95E7Y4Da7c4fuSx92R');
+  var privateKey2 = new PrivateKey('cSCT2jteFyKSJiSpCmEtCz88zkCmxvyjzF8wDkCDiBak2fhULoMo');
+  var privateKey3 = new PrivateKey('cTKJQJdPgvYgAhc8QAuCFUFXGLL8BkTEpT9rpzjcJoo7Rp3XVcJR');
   var public1 = privateKey1.publicKey;
   var public2 = privateKey2.publicKey;
   var public3 = privateKey3.publicKey;
-  var address = new Address('33zbk2aSZYdNbRsMPPt6jgy6Kq1kQreqeb');
+  var address = new Address('oWBhpPqXRbvtBCzjsEdystsrvZsxzrCxNw');
 
   var output = {
-    txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
+    txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 0,
-    script: new Script("5221025c95ec627038e85b5688a9b3d84d28c5ebe66e8c8d697d498e20fe96e3b1ab1d2102cdddfc974d41a62f1f80081deee70592feb7d6e6cf6739d6592edbe7946720e72103c95924e02c240b5545089c69c6432447412b58be43fd671918bd184a5009834353ae"),
+    script: new Script("47304402207885e88652ec3f7d46427412679adf631f0b628a805dd7218fb5c9c8a4d1e021022041096bc99d78b1cbed9163350204584c548350772ea0c9f4d85e125fcc561bab0121038cf340b469648f6ad7172eba59228e38a3fe5df80c106da19c4dbf1bcab938bb"),
     satoshis: 1000000
   };
   it('can count missing signatures', function() {
