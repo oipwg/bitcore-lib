@@ -15,13 +15,13 @@ var validbase58 = require('./data/florincoind/base58_keys_valid.json');
 var invalidbase58 = require('./data/florincoind/base58_keys_invalid.json');
 
 describe('PrivateKey', function() {
-  var hex = '96c132224121b509b7d0a16245e957d9192609c5637c6228311287b1be21627a';
+  var hex = '5bfd923b4950181c2466a7b44fc759774b4bbbe99a8922dce9326c497e2c963f';
   var hex2 = '8080808080808080808080808080808080808080808080808080808080808080';
   var buf = new Buffer(hex, 'hex');
-  var wifTestnet = 'cSdkPxkAjA4HDr5VHgsebAPDEh9Gyub4HK8UJr2DFGGqKKy4K5sG';
+  var wifTestnet = 'cRU1o92zDCSYEHR7FdmjPATf6XKoTGJxvsNeva4tgiLjt819mkzQ';
   var wifTestnetUncompressed = '92jJzK4tbURm1C7udQXxeCBvXHoHJstDXRxAMouPG1k1XUaXdsu';
-  var wifLivenet = 'L2Gkw3kKJ6N24QcDuH4XDqt9cTqsKTVNDGz1CRZhk9cq4auDUbJy';
-  var wifLivenetUncompressed = '5JxgQaFM1FMd38cd14e3mbdxsdSa9iM2BV6DHBYsvGzxkTNQ7Un';
+  var wifLivenet = 'RAbbcVkNJPSoJkxLgqWFLHCV6PZQosCqFqFJu9dvXrXyMmjB9Dr6';
+  var wifLivenetUncompressed = '6UYrXhVrgjhHP9bjyc1HPVbKbkdLtrSLYTLZ9eJRpKUQeMTzuXt';
   var wifNamecoin = '74pxNKNpByQ2kMow4d9kF6Z77BYeKztQNLq3dSyU4ES1K5KLNiz';
 
   it('should create a new random private key', function() {
@@ -77,13 +77,13 @@ describe('PrivateKey', function() {
   });
 
   it('should create a private key from WIF string', function() {
-    var a = new PrivateKey('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m');
+    var a = new PrivateKey(wifLivenet);
     should.exist(a);
     should.exist(a.bn);
   });
 
   it('should create a private key from WIF buffer', function() {
-    var a = new PrivateKey(Base58Check.decode('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m'));
+    var a = new PrivateKey(Base58Check.decode(wifLivenet));
     should.exist(a);
     should.exist(a.bn);
   });
@@ -120,13 +120,13 @@ describe('PrivateKey', function() {
 
     it('should not be able to instantiate private key because of network mismatch', function() {
       expect(function() {
-        return new PrivateKey('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m', 'testnet');
+        return new PrivateKey(wifLivenet, 'testnet');
       }).to.throw('Private key network mismatch');
     });
 
     it('should not be able to instantiate private key WIF is too long', function() {
       expect(function() {
-        var buf = Base58Check.decode('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m');
+        var buf = Base58Check.decode(wifLivenet);
         var buf2 = Buffer.concat([buf, new Buffer(0x01)]);
         return new PrivateKey(buf2);
       }).to.throw('Length of buffer must be 33 (uncompressed) or 34 (compressed');
@@ -254,19 +254,19 @@ describe('PrivateKey', function() {
 
   describe('#toAddress', function() {
     it('should output this known livenet address correctly', function() {
-      var privkey = PrivateKey.fromWIF('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m');
+      var privkey = PrivateKey.fromWIF(wifLivenetUncompressed);
       var address = privkey.toAddress();
-      address.toString().should.equal('1A6ut1tWnUq1SEQLMr4ttDh24wcbJ5o9TT');
+      address.toString().should.equal('FGnu49xmR6MDgZ5biBASB73A9jzn5G2Chz');
     });
 
     it('should output this known testnet address correctly', function() {
-      var privkey = PrivateKey.fromWIF('cR4qogdN9UxLZJXCNFNwDRRZNeLRWuds9TTSuLNweFVjiaE4gPaq');
+      var privkey = PrivateKey.fromWIF('91p3MMEUTituY9dE6mncQBp7AnZtpZ2zT7ZfKi9waYdEy2pHiNS');
       var address = privkey.toAddress();
-      address.toString().should.equal('mtX8nPZZdJ8d3QNLRJ1oJTiEi26Sj6LQXS');
+      address.toString().should.equal('oUZ8KZ4DFW83kteUCBY4xKfXXUfkeZQ2ZC');
     });
 
     it('creates network specific address', function() {
-      var pk = PrivateKey.fromWIF('cR4qogdN9UxLZJXCNFNwDRRZNeLRWuds9TTSuLNweFVjiaE4gPaq');
+      var pk = PrivateKey.fromWIF(wifLivenet);
       pk.toAddress(Networks.livenet).network.name.should.equal(Networks.livenet.name);
       pk.toAddress(Networks.testnet).network.name.should.equal(Networks.testnet.name);
     });
@@ -275,9 +275,9 @@ describe('PrivateKey', function() {
 
   describe('#inspect', function() {
     it('should output known livenet address for console', function() {
-      var privkey = PrivateKey.fromWIF('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m');
+      var privkey = PrivateKey.fromWIF(wifLivenet);
       privkey.inspect().should.equal(
-        '<PrivateKey: b9de6e778fe92aa7edb69395556f843f1dce0448350112e14906efc2a80fa61a, network: livenet>'
+        '<PrivateKey: 5bfd923b4950181c2466a7b44fc759774b4bbbe99a8922dce9326c497e2c963f, network: livenet>'
       );
     });
 
@@ -290,7 +290,7 @@ describe('PrivateKey', function() {
 
     it('outputs "uncompressed" for uncompressed imported WIFs', function() {
       var privkey = PrivateKey.fromWIF(wifLivenetUncompressed);
-      privkey.inspect().should.equal('<PrivateKey: 96c132224121b509b7d0a16245e957d9192609c5637c6228311287b1be21627a, network: livenet, uncompressed>');
+      privkey.inspect().should.equal('<PrivateKey: 5bfd923b4950181c2466a7b44fc759774b4bbbe99a8922dce9326c497e2c963f, network: livenet, uncompressed>');
     });
   });
 
@@ -312,7 +312,7 @@ describe('PrivateKey', function() {
     });
 
     it('should validate as true', function() {
-      var a = PrivateKey.isValid('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m');
+      var a = PrivateKey.isValid(wifLivenet);
       a.should.equal(true);
     });
 
@@ -406,7 +406,7 @@ describe('PrivateKey', function() {
 
     it('should parse this uncompressed livenet address correctly', function() {
       var privkey = PrivateKey.fromString(wifLivenetUncompressed);
-      privkey.toString().should.equal("96c132224121b509b7d0a16245e957d9192609c5637c6228311287b1be21627a");
+      privkey.toString().should.equal("5bfd923b4950181c2466a7b44fc759774b4bbbe99a8922dce9326c497e2c963f");
     });
 
   });
@@ -429,14 +429,14 @@ describe('PrivateKey', function() {
     });
 
     it('should convert this known PrivateKey to known PublicKey and preserve compressed=true', function() {
-      var privwif = 'L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m';
+      var privwif = wifLivenet;
       var privkey = new PrivateKey(privwif, 'livenet');
       var pubkey = privkey.toPublicKey();
       pubkey.compressed.should.equal(true);
     });
 
     it('should convert this known PrivateKey to known PublicKey and preserve compressed=false', function() {
-      var privwif = '92jJzK4tbURm1C7udQXxeCBvXHoHJstDXRxAMouPG1k1XUaXdsu';
+      var privwif = wifTestnetUncompressed;
       var privkey = new PrivateKey(privwif, 'testnet');
       var pubkey = privkey.toPublicKey();
       pubkey.compressed.should.equal(false);
@@ -445,13 +445,13 @@ describe('PrivateKey', function() {
   });
 
   it('creates an address as expected from WIF, livenet', function() {
-    var privkey = new PrivateKey('5J2NYGstJg7aJQEqNwYp4enG5BSfFdKXVTtBLvHicnRGD5kjxi6');
-    privkey.publicKey.toAddress().toString().should.equal('135bwugFCmhmNU3SeCsJeTqvo5ViymgwZ9');
+    var privkey = new PrivateKey(wifLivenet);
+    privkey.publicKey.toAddress().toString().should.equal('FTJAqaCyPdx9z3uSNNZz2r1D98gEJ4QpzU');
   });
 
   it('creates an address as expected from WIF, testnet', function() {
-    var privkey = new PrivateKey('92VYMmwFLXRwXn5688edGxYYgMFsc3fUXYhGp17WocQhU6zG1kd');
-    privkey.publicKey.toAddress().toString().should.equal('moiAvLUw16qgrwhFGo1eDnXHC2wPMYiv7Y');
+    var privkey = new PrivateKey(wifTestnet);
+    privkey.publicKey.toAddress().toString().should.equal('oJVTWdux2Njss1SqQwu1QQZK8tnmoPVw7v');
   });
 
 });
