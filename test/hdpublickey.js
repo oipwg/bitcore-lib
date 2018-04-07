@@ -15,11 +15,11 @@ var HDPublicKey = flocore.HDPublicKey;
 var Base58Check = flocore.encoding.Base58Check;
 var Networks = flocore.Networks;
 
-var xprivkey = 'xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi';
-var xpubkey = 'xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8';
-var xpubkeyTestnet = 'tpubD6NzVbkrYhZ4WZaiWHz59q5EQ61bd6dUYfU4ggRWAtNAyyYRNWT6ktJ7UHJEXURvTfTfskFQmK7Ff4FRkiRN5wQH8nkGAb6aKB4Yyeqsw5m';
-var json = '{"network":"livenet","depth":0,"fingerPrint":876747070,"parentFingerPrint":0,"childIndex":0,"chainCode":"873dff81c02f525623fd1fe5167eac3a55a049de3d314bb42ee227ffed37d508","publicKey":"0339a36013301597daef41fbe593a02cc513d0b55527ec2df1050e2e8ff49c85c2","checksum":-1421395167,"xpubkey":"xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8"}';
-var derived_0_1_200000 = 'xpub6BqyndF6rkBNTV6LXwiY8Pco8aqctqq7tGEUdA8fmGDTnDJphn2fmxr3eM8Lm3m8TrNUsLbEjHvpa3adBU18YpEx4tp2Zp6nqax3mQkudhX';
+var xprivkey = 'Fprv4rbspRQ4B6uzsEYhvzDXRh4sFY2A5jHphFpBBNhSBZPijgA5mc8fyr3vBA82WH5w6VW3PTMqcyVx4LTU9Vu6rkeKqT9GMX7Ec7ApYdFxs4e';
+var xpubkey = 'Fpub15bEDvvx1UUJ5idB31kXnq1boZreVC1g4Ujmym73jtvhcUVEK9SvXeNQ2RmL2AW122PytQNzGGrFrrecSjjkUneQd9sVX3cqNDmZaxyS1uX';
+var xpubkeyTestnet = 'Fprt4anHTkK9q58mTVCAvGPJsu5Z1cVwVYm3n8MePXqp8TfwJ3DNbf3w87rXd7JDET93ByUCpinJNY4WqmDLNSpyoQ4YN3fG582fE5Lz86rYEU4';
+var json = '{"network":"livenet","depth":0,"fingerPrint":876747070,"parentFingerPrint":0,"childIndex":0,"chainCode":"873dff81c02f525623fd1fe5167eac3a55a049de3d314bb42ee227ffed37d508","publicKey":"0339a36013301597daef41fbe593a02cc513d0b55527ec2df1050e2e8ff49c85c2","checksum":-2049154834,"xpubkey":"Fpub15bEDvvx1UUJ5idB31kXnq1boZreVC1g4Ujmym73jtvhcUVEK9SvXeNQ2RmL2AW122PytQNzGGrFrrecSjjkUneQd9sVX3cqNDmZaxyS1uX"}';
+var derived_0_1_200000 = 'Fpub1BRr3CEt2o44HKBq8sbXd4SZ6tYj3GejYjYd27634w1nYnr5Remwv5Bm7kkSLxXJB5ZZkK4QFveXYdPMyYXrwXS11vmeceTzPiDc86kuEBo';
 
 describe('HDPublicKey interface', function() {
 
@@ -165,17 +165,7 @@ describe('HDPublicKey interface', function() {
   });
 
   describe('conversion to different formats', function() {
-    var plainObject = {
-      'network':'livenet',
-      'depth':0,
-      'fingerPrint':876747070,
-      'parentFingerPrint':0,
-      'childIndex':0,
-      'chainCode':'873dff81c02f525623fd1fe5167eac3a55a049de3d314bb42ee227ffed37d508',
-      'publicKey':'0339a36013301597daef41fbe593a02cc513d0b55527ec2df1050e2e8ff49c85c2',
-      'checksum':-1421395167,
-      'xpubkey':'xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8'
-    };
+    var plainObject = JSON.parse(json);
     it('roundtrips to JSON and to Object', function() {
       var pubkey = new HDPublicKey(xpubkey);
       expect(HDPublicKey.fromObject(pubkey.toJSON()).xpubkey).to.equal(xpubkey);
