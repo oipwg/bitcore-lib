@@ -58,18 +58,18 @@ describe('PublicKey', function() {
 
       var knownKeys = [
         {
-          wif: 'KzsjKq2FVqVuQv2ueHVFuB65A9uEZ6S1L6F8NuokCrE3V3kE3Ack',
-          priv: '6d1229a6b24c2e775c062870ad26bc261051e0198c67203167273c7c62538846',
-          pub: '03d6106302d2698d6a41e9c9a114269e7be7c6a0081317de444bb2980bf9265a01',
-          pubx: 'd6106302d2698d6a41e9c9a114269e7be7c6a0081317de444bb2980bf9265a01',
-          puby: 'e05fb262e64b108991a29979809fcef9d3e70cafceb3248c922c17d83d66bc9d'
+          wif: 'cT6Zi96fYzJbdZy38GjmLPsFFqu7UdCh84qBN7EwE92zj3P2AdwB',
+          priv: 'a48cb9a87e562a921def1c786f6abbe89109ee2ab3360753f499a565e61f631c',
+          pub: '03ccf263d5b143f27439d43934d675f5310b0cc99a93c661240eb228a1ea238884',
+          pubx: 'ccf263d5b143f27439d43934d675f5310b0cc99a93c661240eb228a1ea238884',
+          puby: '4cb3d9436e39d2c90354e9f763b38a7fdd016c69a9afbd01b4afe18000bc3f09'
         },
         {
-          wif: 'L5MgSwNB2R76xBGorofRSTuQFd1bm3hQMFVf3u2CneFom8u1Yt7G',
-          priv: 'f2cc9d2b008927db94b89e04e2f6e70c180e547b3e5e564b06b8215d1c264b53',
-          pub: '03e275faa35bd1e88f5df6e8f9f6edb93bdf1d65f4915efc79fd7a726ec0c21700',
-          pubx: 'e275faa35bd1e88f5df6e8f9f6edb93bdf1d65f4915efc79fd7a726ec0c21700',
-          puby: '367216cb35b086e6686d69dddd822a8f4d52eb82ac5d9de18fdcd9bf44fa7df7'
+          wif: 'cTZWGxEuGqTckr95w3osyBDWL24TsQf8GQznEYCPvtZEVqsyq2HP',
+          priv: 'b268b8cdad4ea2520e8fc4c5fc4baa031893a9524a79d62b9eac316c0e85dfdf',
+          pub: '02d3cdf8ea1dbfb38e5c01004cd1a20fb500c0c96f881620ba7818fe6ef3f14ea2',
+          pubx: 'd3cdf8ea1dbfb38e5c01004cd1a20fb500c0c96f881620ba7818fe6ef3f14ea2',
+          puby: '7f0b113be59680f1cfce3852c7eadd74d0bd472e351f1c3a468cb9eead5b495a'
         }
       ];
 
@@ -337,13 +337,13 @@ describe('PublicKey', function() {
     it('should output this known mainnet address correctly', function() {
       var pk = new PublicKey('03c87bd0e162f26969da8509cafcb7b8c8d202af30b928c582e263dd13ee9a9781');
       var address = pk.toAddress('livenet');
-      address.toString().should.equal('1A6ut1tWnUq1SEQLMr4ttDh24wcbJ5o9TT');
+      address.toString().should.equal('FEw2LpKbdo3g4QHNDXj3rcDZ6bdcE6Nx8b');
     });
 
     it('should output this known testnet address correctly', function() {
       var pk = new PublicKey('0293126ccc927c111b88a0fe09baa0eca719e2a3e087e8a5d1059163f5c566feef');
       var address = pk.toAddress('testnet');
-      address.toString().should.equal('mtX8nPZZdJ8d3QNLRJ1oJTiEi26Sj6LQXS');
+      address.toString().should.equal('oVsYipkiU1z8K8vgWyM5ExoPE38DXtasEt');
     });
 
   });
@@ -389,9 +389,9 @@ describe('PublicKey', function() {
     });
 
     it('should output known compressed pubkey with network for console', function() {
-      var privkey = PrivateKey.fromWIF('L3T1s1TYP9oyhHpXgkyLoJFGniEgkv2Jhi138d7R2yJ9F4QdDU2m');
+      var privkey = PrivateKey.fromWIF('cT6Zi96fYzJbdZy38GjmLPsFFqu7UdCh84qBN7EwE92zj3P2AdwB');
       var pubkey = new PublicKey(privkey);
-      pubkey.inspect().should.equal('<PublicKey: 03c87bd0e162f26969da8509cafcb7b8c8d202af30b928c582e263dd13ee9a9781>');
+      pubkey.inspect().should.equal('<PublicKey: 03ccf263d5b143f27439d43934d675f5310b0cc99a93c661240eb228a1ea238884>');
     });
 
   });
