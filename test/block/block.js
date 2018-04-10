@@ -11,7 +11,7 @@ var fs = require('fs');
 var should = chai.should();
 var Transaction = flocore.Transaction;
 
-// Flo Testnet Block 90616, Hash eee284bf53db42c2374d8caec7d6aebd4b2289330b39db64447e2541ede86ec5
+// Flo Testnet Block 50000, Hash 629a1c3f692fd1e4c9a711d85a31a0861e6b551edf993c8c5b20619130f30c07
 var dataRawBlockBuffer = fs.readFileSync('test/data/blk50000-testnet.dat');
 var dataRawBlockBinary = fs.readFileSync('test/data/blk50000-testnet.dat', 'binary');
 var dataJson = fs.readFileSync('test/data/blk50000-testnet.json').toString();
@@ -31,7 +31,7 @@ describe('Block', function() {
 
   var genesishex = '01000000000000000000000000000000000000000000000000000000000000000000000000232baba7291c9d844bb24867aafe453ea7e290685612552d595adc8d0c0f738c40bf51f0ff0f1ea4819c3b0102000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4904ffff001d010441536c617368646f74202d203137204a756e652032303133202d205361756469204172616269612053657420546f2042616e2057686174734170702c20536b797065ffffffff0100e40b54020000004341040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9ac000000001d746578743a466c6f72696e636f696e2067656e6573697320626c6f636b';
   var genesisbuf = new Buffer(genesishex, 'hex');
-  var genesisidhex = '09c7781c9df90708e278c35d38ea5c9041d7ecfcdd1c56ba67274b7cff3e1ceaget';
+  var genesisidhex = '09c7781c9df90708e278c35d38ea5c9041d7ecfcdd1c56ba67274b7cff3e1cea';
   var blockOneHex = '01000000ea1c3eff7c4b2767ba561cddfcecd741905cea385dc378e20807f99d1c78c7094842fc8ab2397e0e393ce76c4ad72699d5e5306fc35b9c3e3dfaf01a0eadf3434373bf51f0ff0f1e0007c4770102000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0e044373bf510104062f503253482fffffffff0100e40b54020000002321027e8be33c6c1e6fab75370deb8467b5a8b33b354ab44e116332838647e76c0669ac0000000000';
   var blockOneBuf = new Buffer(blockOneHex, 'hex');
   var blockOneId = '1c57783191f9fab7cf4dc62be10ce60cb5a4dd5de1172bb08e1c66df6d16a1c5';
@@ -71,14 +71,14 @@ describe('Block', function() {
 
     it('should instantiate from a raw block binary', function() {
       var x = Block.fromRawBlock(dataRawBlockBinary);
-      x.header.version.should.equal(2);
-      new BN(x.header.bits).toString('hex').should.equal('1e0fffff');
+      x.header.version.should.equal(1);
+      new BN(x.header.bits).toString('hex').should.equal('1e0ffff0');
     });
 
     it('should instantiate from raw block buffer', function() {
       var x = Block.fromRawBlock(dataRawBlockBuffer);
-      x.header.version.should.equal(2);
-      new BN(x.header.bits).toString('hex').should.equal('1e0fffff');
+      x.header.version.should.equal(1);
+      new BN(x.header.bits).toString('hex').should.equal('1e0ffff0');
     });
 
   });
@@ -174,29 +174,29 @@ describe('Block', function() {
       block.id.should.equal(blockOneId);
       block.toObject().should.deep.equal({
         header: {
-          hash: '00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048',
+          hash: '1c57783191f9fab7cf4dc62be10ce60cb5a4dd5de1172bb08e1c66df6d16a1c5',
           version: 1,
-          prevHash: '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f',
-          merkleRoot: '0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098',
-          time: 1231469665,
-          bits: 486604799,
-          nonce: 2573394689
+          prevHash: '09c7781c9df90708e278c35d38ea5c9041d7ecfcdd1c56ba67274b7cff3e1cea',
+          merkleRoot: '43f3ad0e1af0fa3d3e9c5bc36f30e5d59926d74a6ce73c390e7e39b28afc4248',
+          time: 1371501379,
+          bits: 504365040,
+          nonce: 2009335552
         },
         transactions: [{
-          hash: '0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098',
+          hash: '745d723b14477c24c517b61c97beab535ffa45dab56095eac11882086040a4db',
           version: 1,
           inputs: [{
             prevTxId: '0000000000000000000000000000000000000000000000000000000000000000',
             outputIndex: 4294967295,
             sequenceNumber: 4294967295,
-            script: '04ffff001d0104'
+            script: '044373bf510104062f503253482f'
           }],
           outputs: [{
-            satoshis: 5000000000,
-            script: '410496b538e853519c726a2c91e61ec11600ae1390813a627c66fb8be7947be63c' +
-              '52da7589379515d4e0a604f8141781e62294721166bf621e73a82cbf2342c858eeac'
+            satoshis: 10000000000,
+            script: '21027e8be33c6c1e6fab75370deb8467b5a8b33b354ab44e116332838647e76c0669ac'
           }],
-          nLockTime: 0
+          nLockTime: 0,
+          version: 2
         }]
       });
     });
