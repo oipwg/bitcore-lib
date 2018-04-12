@@ -1,6 +1,8 @@
 'use strict';
 
 var should = require('chai').should();
+
+var sinon = require('sinon');
 var flocore = require('../..');
 var Interpreter = flocore.Script.Interpreter;
 var Transaction = flocore.Transaction;
@@ -10,7 +12,6 @@ var BN = flocore.crypto.BN;
 var BufferWriter = flocore.encoding.BufferWriter;
 var Opcode = flocore.Opcode;
 var _ = require('lodash');
-var sinon = require('sinon');
 
 var script_valid = require('../data/florincoind/script_valid');
 var script_invalid = require('../data/florincoind/script_invalid');
