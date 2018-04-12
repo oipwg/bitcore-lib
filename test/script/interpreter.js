@@ -335,7 +335,7 @@ describe('Interpreter', function() {
       var verified = interp.verify(scriptSig, scriptPubkey, spendtx, 0, flags);
       
       var testEval = [
-        // {result: "BAD_OPCODE", errstring: "SCRIPT_ERR_UNKNOWN_ERROR: Error: Length of push value not equal to length of data"}
+        {result: "BAD_OPCODE", errstring: "SCRIPT_ERR_UNKNOWN_ERROR: Error: Length of push value not equal to length of data"}
       ];
       for (var x in testEval){
         if (vector[3] === testEval[x].result && interp.errstr === testEval[x].errstring){
@@ -343,10 +343,16 @@ describe('Interpreter', function() {
         }
       }
       if (expected){
-        if (interp.errstr.includes(vector[3]) && vector[3] !== "OK")
+        if (interp.errstr.includes(vector[3]) && vector[3] !== "OK"){
+          interp.errstr = undefined;
           expected = false;
+        }
       }
-      verified.should.equal(expected);
+      if (interp.errstr && expected !== verified){
+        interp.errstr.should.equal(expected);
+      } else {
+        verified.should.equal(expected);
+      }
     } else {
       // Verify Segwit Stuff!
     }
