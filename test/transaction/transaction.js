@@ -6,6 +6,7 @@ var should = require('chai').should();
 var expect = require('chai').expect;
 var _ = require('lodash');
 var sinon = require('sinon');
+var fs = require('fs');
 
 var flocore = require('../..');
 var BN = flocore.crypto.BN;
@@ -21,6 +22,11 @@ var Opcode = flocore.Opcode;
 var errors = flocore.errors;
 
 var transactionVector = require('../data/tx_creation');
+
+// Testnet Flo Transaction
+var segwitTXID = "a001bbf5f456e2678d54065385de5082a62d3dd061676540f3f8af774f7560a3";
+var segwitWitnessHash = "fc22bf04bd1f49a42675ed1b125fa5a871f5ab70e32dcf3480a38141b748fc46";
+var segwitTransactionHex = fs.readFileSync('test/data/segwit-transaction.dat');
 
 describe('Transaction', function() {
 
@@ -41,10 +47,10 @@ describe('Transaction', function() {
     }).to.throw(errors.InvalidArgument);
   });
 
-  var testScript = 'OP_DUP OP_HASH160 4bfe7033b03d04a9143203cfb8350cad125ebfa4 OP_EQUALVERIFY OP_CHECKSIG';
-  var testScriptHex = '76a9144bfe7033b03d04a9143203cfb8350cad125ebfa488ac';
-  var testPrevTx = '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f';
-  var testAmount = 100000;
+  var testScript = 'OP_DUP OP_HASH160 7dcd23de5408d28edf0f45da2b8f7c57a398df31 OP_EQUALVERIFY OP_CHECKSIG';
+  var testScriptHex = '76a9147dcd23de5408d28edf0f45da2b8f7c57a398df3188ac';
+  var testPrevTx = 'ed3fa66cbaef9333135a42d6deb7c8a5eb3675aac028b6a943ab4574618a70d1';
+  var testAmount = 1 * 1e8;
   var testTransaction = new Transaction()
     .from({
       'txId': testPrevTx,
@@ -1240,7 +1246,7 @@ describe('Transaction', function() {
   describe('Segregated Witness', function() {
     it('identify as segwit transaction', function() {
       // https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki
-      var version = new Buffer('01000000', 'hex');
+      var version = new Buffer('02000000', 'hex');
       var marker = new Buffer('00', 'hex'); //always zero
       var flag = new Buffer('01', 'hex'); //non zero
       var inputCount = new Buffer('01', 'hex');
@@ -1255,10 +1261,10 @@ describe('Transaction', function() {
       tx.hasWitnesses().should.equal(true);
     });
     it('correctly calculate hash for segwit transaction', function() {
-      var txBuffer = new Buffer('01000000000101b0e5caa7e37d4b8530c3e1071a36dd5e05d1065cf7224ddff42c69e3387689870000000000ffffffff017b911100000000001600144ff831574da8bef07f8bc97244a1666147b071570247304402203fcbcfddbd6ca3a90252610dd63f1be50b2d926b8d87c912da0a3e42bb03fba002202a90c8aad75da22b0549c72618b754114583e934c0b0d2ccd6c13fcd859ba4ed01210363f3f47f4555779de405eab8d0dc8c2a4f3e09f4171a3fa47c7a77715795319800000000', 'hex');
+      var txBuffer = new Buffer(segwitTransactionHex, 'hex');
       var tx = flocore.Transaction().fromBuffer(txBuffer);
-      tx.hash.should.equal('7f1a2d46746f1bfbb22ab797d5aad1fd9723477b417fa34dff73d8a7dbb14570');
-      tx.witnessHash.should.equal('3c26fc8b5cfe65f96d955cecfe4d11db2659d052171f9f31af043e9f5073e46b');
+      JSON.stringify(tx).should.equal(segwitTXID);
+      tx.witnessHash.should.equal(segwitWitnessHash);
     });
     it('round trip nested witness p2sh', function() {
       var txBuffer = new Buffer('010000000001010894bb2bbfd5249b1c55f7bc64352bb64894938bc6439f43f28a58bfa7c73205000000002322002077b16b966ee6a4b8a0901351221d279afd31d3f90df52a3fc53436ea9abde5b0ffffffff01010000000000000000030047304402200fa23efa9a8d6ae285cfc82f81e6c2196d14167553b10da1845abd2c9fe38dc502207a40a58ee5b739e902b275018dfa1bee0d608736ff4317b028fbc29391f4554f01475221037b8dc5861a0ef7b0a97b41d2d1e27186f019d4834dbc99f24952b6f5080f5cce21027152378182102b68b5fce42f9f365ec272c48afda6b0816e735c1dc4b96dd45a52ae00000000', 'hex');
@@ -1663,14 +1669,15 @@ describe('Transaction', function() {
 });
 
 
-var tx_empty_hex = '01000000000000000000';
+var tx_empty_hex = '0200000000000000000000';
 
 /* jshint maxlen: 1000 */
-var tx_1_hex = '01000000015884e5db9de218238671572340b207ee85b628074e7e467096c267266baf77a4000000006a473044022013fa3089327b50263029265572ae1b022a91d10ac80eb4f32f291c914533670b02200d8a5ed5f62634a7e1a0dc9188a3cc460a986267ae4d58faf50c79105431327501210223078d2942df62c45621d209fab84ea9a7a23346201b7727b9b45a29c4e76f5effffffff0150690f00000000001976a9147821c0a3768aa9d1a37e16cf76002aef5373f1a888ac00000000';
-var tx_1_id = '779a3e5b3c2c452c85333d8521f804c1a52800e60f4b7c3bbe36f4bab350b72c';
+var tx_1_hex = '020000000159795c3aeda8badf51e3d77201361f0eb53b0dce6eb007ea865ab2f49cda461e000000006b4830450221008e346b29288f11ccf6b02b859daa08b80fba23be6f395a0af0cb8e424fc9ae40022032a01b5d0c1f9c79e050fd76d3f558b7f31e2caaef94d1627dc315950eafa07b012103f9791bd91820ad68c85e0858ab2f302e6ae0d1c1858178db1c702f2e29b49474feffffff0200e1f505000000001976a9147dcd23de5408d28edf0f45da2b8f7c57a398df3188ac622d7c48180900001976a9141722f102a4f0d701e0b723065cdec1ce6fc20b5788ac6698010000';
+var tx_1_id = '7c5fab1c639252486d5a9d86bcf00c96a3f975eb14a4573a5729b4ebd24ed206';
 
 
-var tx2hex = '0100000001e07d8090f4d4e6fcba6a2819e805805517eb19e669e9d2f856b41d4277953d640000000091004730440220248bc60bb309dd0215fbde830b6371e3fdc55685d11daa9a3c43828892e26ce202205f10cd4011f3a43657260a211f6c4d1fa81b6b6bdd6577263ed097cc22f4e5b50147522102fa38420cec94843ba963684b771ba3ca7ce1728dc2c7e7cade0bf298324d6b942103f948a83c20b2e7228ca9f3b71a96c2f079d9c32164cd07f08fbfdb483427d2ee52aeffffffff01180fe200000000001976a914ccee7ce8e8b91ec0bc23e1cfb6324461429e6b0488ac00000000';
+var tx2hex = '020000000106d24ed2ebb429573a57a414eb75f9a3960cf0bc869d5a6d485292631cab5f7c010000006a473044022022494a75e86ead0feef9508414b7b796ab829176647828abfbd32b9e1a5697fe02201426fd3a13f1ce0f30eac0bc1689ddbbf331e812c280d2b24af7d67cb411fe30012102fa9c3844bc38508b77fd6e080869fa4c35391af76ee1c9cb933ee9aa1efd2c8efeffffff0200e1f505000000001976a9147dcd23de5408d28edf0f45da2b8f7c57a398df3188acddaf8542180900001976a91422a001db28cf865c15a42fab4e59d522aca0763188ac6698010011746578743a54657374204d657373616765';
+var tx2id = 'ed3fa66cbaef9333135a42d6deb7c8a5eb3675aac028b6a943ab4574618a70d1';
 
 var unsupportedTxObj = '{"version":1,"inputs":[{"prevTxId":"a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458","outputIndex":0,"sequenceNumber":4294967295,"script":"OP_1","output":{"satoshis":1020000,"script":"OP_1 OP_ADD OP_2 OP_EQUAL"}}],"outputs":[{"satoshis":1010000,"script":"OP_DUP OP_HASH160 20 0x7821c0a3768aa9d1a37e16cf76002aef5373f1a8 OP_EQUALVERIFY OP_CHECKSIG"}],"nLockTime":0}';
 
