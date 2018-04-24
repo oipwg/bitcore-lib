@@ -10,8 +10,65 @@
     "coverage": "gulp coverage",
     "build": "gulp"
   },
+  "contributors": [
+    {
+      "name": "Charlie Lee",
+      "email": "coblee@litecoin.org"
+    },
+    {
+      "name": "Daniel Cousens",
+      "email": "bitcoin@dcousens.com"
+    },
+    {
+      "name": "Esteban Ordano",
+      "email": "eordano@gmail.com"
+    },
+    {
+      "name": "Gordon Hall",
+      "email": "gordon@bitpay.com"
+    },
+    {
+      "name": "Jeff Garzik",
+      "email": "jgarzik@bitpay.com"
+    },
+    {
+      "name": "Kyle Drake",
+      "email": "kyle@kyledrake.net"
+    },
+    {
+      "name": "Manuel Araoz",
+      "email": "manuelaraoz@gmail.com"
+    },
+    {
+      "name": "Matias Alejo Garcia",
+      "email": "ematiu@gmail.com"
+    },
+    {
+      "name": "Ryan X. Charles",
+      "email": "ryanxcharles@gmail.com"
+    },
+    {
+      "name": "Stefan Thomas",
+      "email": "moon@justmoon.net"
+    },
+    {
+      "name": "Stephen Pair",
+      "email": "stephen@bitpay.com"
+    },
+    {
+      "name": "Wei Lu",
+      "email": "luwei.here@gmail.com"
+    },
+    {
+      "name": "Sky Young",
+      "email": "sky@alexandria.io"
+    }
+  ],
   "keywords": [
+    "flo",
     "florincoin",
+    "bitcoin",
+    "litecoin",
     "transaction",
     "address",
     "p2p",
@@ -46,7 +103,7 @@
     "bitcore-build": "https://github.com/bitpay/bitcore-build.git#d4e8b2b2f1e2c065c3a807dcb6a6250f61d67ab3",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
-    "gulp": "^3.8.10",
+    "gulp": "^3.9.1",
     "sinon": "^1.13.0"
   },
   "license": "MIT"

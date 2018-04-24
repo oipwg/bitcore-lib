@@ -1,15 +1,4 @@
 Flocore Library
-=======
-
-[![NPM Package](https://img.shields.io/npm/v/flocore-lib.svg?style=flat-square)](https://www.npmjs.org/package/flocore-lib)
-[![Build Status](https://img.shields.io/travis/oipwg/flocore-lib.svg?branch=master&style=flat-square)](https://travis-ci.org/oipwg/flocore-lib)
-[![Coverage Status](https://img.shields.io/coveralls/oipwg/flocore-lib.svg?style=flat-square)](https://coveralls.io/r/oipwg/flocore-lib)
-
-A pure and powerful JavaScript Florincoin library.
-
-## Principles
-
-Florincoin is a powerful new peer-to-peer platform for the next generation of financial technology. The decentralized nature of the Florincoin network allows for highly resilient florincoin infrastructure, and the developer community needs reliable, open-source tools to implement florincoin apps and services.
 
 ## Get Started
 
