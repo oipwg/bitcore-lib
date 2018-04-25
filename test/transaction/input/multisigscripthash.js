@@ -21,10 +21,11 @@ describe('MultiSigScriptHashInput', function() {
   var public1 = privateKey1.publicKey;
   var public2 = privateKey2.publicKey;
   var public3 = privateKey3.publicKey;
-  var address = new Address('oVmBxGbPMcZr514EDFgwj1SE1bqxPmGmAH');
+  // var address = new Address([public1, public2, public3], 2);
+  var address = new Address("QeJdou13jd18ghcr3F2ktDff1nvbjJnGrS");
 
   var output = {
-    address: 'oPoBiZJxdHtNYVNhNTspRE8a4id6ytMKzY',
+    address: address,
     txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 0,
     script: new Script(address),
@@ -125,7 +126,7 @@ describe('MultiSigScriptHashInput', function() {
       .to(address, 1000000);
     var input = transaction.inputs[0];
     var scriptCode = input.getScriptCode();
-    scriptCode.toString('hex').should.equal('695221025c95ec627038e85b5688a9b3d84d28c5ebe66e8c8d697d498e20fe96e3b1ab1d2102cdddfc974d41a62f1f80081deee70592feb7d6e6cf6739d6592edbe7946720e72103c95924e02c240b5545089c69c6432447412b58be43fd671918bd184a5009834353ae');
+    scriptCode.toString('hex').should.equal('6952210235f6364aca36f01702b8dab94060acf431feaf94e24668c350c747c24ea57d1421025d5fdce77bdbff09d3139d5716bfb4d1a269cf642c34b2049f6c5558b59006e4210288b7a3ce0e26fd4e98c2befc2df440ea733d848491fd1f11a4b3b0722d7f29a853ae');
   });
   it('will get the satoshis buffer for nested witness', function() {
     var address = Address.createMultisig([public1, public2, public3], 2, 'testnet', true);
