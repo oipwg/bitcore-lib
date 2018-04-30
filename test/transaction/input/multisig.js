@@ -21,12 +21,12 @@ describe('MultiSigInput', function() {
   var public1 = privateKey1.publicKey;
   var public2 = privateKey2.publicKey;
   var public3 = privateKey3.publicKey;
-  var address = new Address('oWBhpPqXRbvtBCzjsEdystsrvZsxzrCxNw');
+  var address = new Address('oZB7KohBdHQB6sir6ZHzproALBcysjo9yW');
 
   var output = {
     txId: '0fa147b287dacf753fd5f0e9aaf342464555b78960352ec043b9f7289e82e60f',
     outputIndex: 0,
-    script: new Script("47304402207885e88652ec3f7d46427412679adf631f0b628a805dd7218fb5c9c8a4d1e021022041096bc99d78b1cbed9163350204584c548350772ea0c9f4d85e125fcc561bab0121038cf340b469648f6ad7172eba59228e38a3fe5df80c106da19c4dbf1bcab938bb"),
+    script: Script.buildPublicKeyOut(public1),
     satoshis: 1000000
   };
   it('can count missing signatures', function() {

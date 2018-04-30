@@ -1250,7 +1250,7 @@ describe('Transaction', function() {
       var marker = new Buffer('00', 'hex'); //always zero
       var flag = new Buffer('01', 'hex'); //non zero
       var inputCount = new Buffer('01', 'hex');
-      var inputDummy = new Buffer('2052cda8bc0c2cb743f154881fc85cb675527dcf2f7a5938241020c33341b3f70000000000ffffffff', 'hex');
+      var inputDummy = new Buffer('2052cda8bc0c2cb743f154881fc85cb675527dcf2f7a5938241020c33341b3f70000000000ffffffff00', 'hex');
       var outputCount = new Buffer('00', 'hex');
       var witness = new Buffer('01', 'hex');
       var witnessItems = new Buffer('00', 'hex');
